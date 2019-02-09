@@ -77,6 +77,12 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
     }
 
     private void setupList(){
+
+
+
+
+
+
         ArrayList<String> resultnya = new ArrayList<>();
         final Set<String> keySet = chains.keySet();
         for(String key : keySet){
