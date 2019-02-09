@@ -74,6 +74,15 @@ public class SplashScreenActivity extends AppCompatActivity {
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H6", "Penyakit Koksidiosis", "Segera menghubungi dokter", "Dispepsia fungsional adalah keluhan yang berhubungan dengan makan atau keluhan yang oleh pasien ataupun dokternya dikaitkan dengan gangguan saluran cerna bagian atas. Dalam konsensus Roma II tahun 2000, disepakati bahwa definisi dispepsia sebagai dyspepsia ferers to pain or discomfort centered in the upper abdomen. Formulasi keluhan nyeri atau tidak nyaman menjadi sesuatu yang relatif, terlebih lagi bila diekspresikan dalam bahasa yang berbeda.", "imgicon"));
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H7", "Penyakit Ascariasis", "Konsumsi air yang meningkat disertai olahraga rutin, menghindari beberapa makanan dan minuman seperti gandum, susu, kafein, bawang, coklat dan beberapa sayur-sayuran, bisa mengkonsumsi lagi setalah 3 bulan dengan jumlah diberikan secara bertahap", "Irritable bowel syndrome adalah satu penyakit gastrointestinal fungsional. Adanya nyeri perut, distensi dan gangguan pola defakasi tanpa gangguan organik.", "imgicon"));
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H8", "Penyakit Salmonellosis", "Meninggikan posisi kepala pada saat tidur serta menghindari makan sebelum tidur, berhenti merokok dan mengkonsumsi alkohol, mengurangi konsumsi lemak, menurunkan berat badan pada pasien kegemukan serta menghindari pemakaian ketat, menghindari makanan atau minuman seperti coklat, teh, peppermint, kopi dan minuman bersoda", "Refluks gastroesofagel adalah suatu keadaan patologis sebagai akibat refluks kandungan lambung ke dalam esofagus, dengan berbagai gejala yang timbul akibat keterlibatan esofagus, faring, laring dan saluran nafas.", "imgicon"));
+//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P1", "Penyakit Hog Cholera", "Segera menghubungi dokter", "Gastritis adalah proses inflasi pada mukosa dan submokasa lambung. Gastritis merupakan gangguan kesehatan yang paling sering dijumpai di klinik, karena diagnosanya sering hanya berdasarkan gejala klinis bukan pemeriksaan histopatologi.","imgicon"));
+//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P2","Penyakit Cacar Babi","Perbaikan pola hidup, perbaikan pola makan dan minum, perbaikan pola atau cara defekasi. Memperbaiki defekasi merupakan pengobatan yang selalu harus ada dalam setiap bentuk dan derajat hemoroid.","Hemoroid merupakan pelebaran dan inflasi pembuluh darah vena di daerah anus yang berasal dari plexus hemorrhoidalis. Di badeah atau di luar linea dentate pelebaran vena yang berada di bawah kulit (subkutan) di sebut hemorid eksternal. Sedangkan di atas atau di dalam linea dentate, pelebaran vena yang berada di bawan mukosa (submukosa) di sebut hemoroid internal. Biasanya struktur anatomis anal canal masih normal.","imgicon"));
+//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P3","Penyakit Colibasilosis", "Segera menghubungi dokter.", "Tukak gaster adalah suatu gambaran bulat atau semi bulat/oval, ukuran > 5 mm kedalaman submukosal pada mukosa lambung akibat terputusnya kontinuitas/integritas mukosa lambung. Tukas gaster merupkan luka terbuka dengan pinggir edema disertai indurasi dengan dasar ditutupi debris.","imgicon"));
+//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P4", "Penyakit Streptococosis", "Pemberian diet yang mudah cerna khususnya pada tukak yang aktif perlu dilakukan. Makan dalam jumlah sedikit dan lebih sering, lebih baik dari pada makan yang sekaligus kenyang. Mengurangi makanan yang merangsang pengeluaran asam lambung atau pepsin, makanan yang merangsang timbulnya nyeri dan zat-zat lain yang dapat mengganggu pertahanan mukosa gastroduedenal.", "Tukak duodenum secara anatomis didefinisikan sebagai suatu defek mukosa/submokusa yang terbatas tegas dapat menembus muskularis mukosa sampai lapisan serosa sehingga dapat terjadi perforasi. Secara klinis, suatu tukak adalah hilangnya epitel superfisial atau lapisan lebih dalam dengan diameter > 5 mm yang dapat diamati secara endoskopsis atau radiologis. ", "imgicon"));
+//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P5", "Penyakit Erysipelas", "Segera menghubungi dokter", "Secara praktis pengertian malnutrisi adalah apabila terjadi penurunan berat badan lebih dari 10% dari berat badan sebelumnya dalam 3 bulan terakhir. Selain kriteria yang sering di gunakan adalah apabila pada saat pengukuran berat badan kurang dari 90% berat badan ideal berdasarkan tinggi badan atau jika indeks massa tubuh (IMT) kurang dari 18,5.", "imgicon"));
+//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P6", "Penyakit Koksidiosis", "Segera menghubungi dokter", "Dispepsia fungsional adalah keluhan yang berhubungan dengan makan atau keluhan yang oleh pasien ataupun dokternya dikaitkan dengan gangguan saluran cerna bagian atas. Dalam konsensus Roma II tahun 2000, disepakati bahwa definisi dispepsia sebagai dyspepsia ferers to pain or discomfort centered in the upper abdomen. Formulasi keluhan nyeri atau tidak nyaman menjadi sesuatu yang relatif, terlebih lagi bila diekspresikan dalam bahasa yang berbeda.", "imgicon"));
+//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P7", "Penyakit Ascariasis", "Konsumsi air yang meningkat disertai olahraga rutin, menghindari beberapa makanan dan minuman seperti gandum, susu, kafein, bawang, coklat dan beberapa sayur-sayuran, bisa mengkonsumsi lagi setalah 3 bulan dengan jumlah diberikan secara bertahap", "Irritable bowel syndrome adalah satu penyakit gastrointestinal fungsional. Adanya nyeri perut, distensi dan gangguan pola defakasi tanpa gangguan organik.", "imgicon"));
+//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P8", "Penyakit Salmonellosis", "Meninggikan posisi kepala pada saat tidur serta menghindari makan sebelum tidur, berhenti merokok dan mengkonsumsi alkohol, mengurangi konsumsi lemak, menurunkan berat badan pada pasien kegemukan serta menghindari pemakaian ketat, menghindari makanan atau minuman seperti coklat, teh, peppermint, kopi dan minuman bersoda", "Refluks gastroesofagel adalah suatu keadaan patologis sebagai akibat refluks kandungan lambung ke dalam esofagus, dengan berbagai gejala yang timbul akibat keterlibatan esofagus, faring, laring dan saluran nafas.", "imgicon"));
+
       /*
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P9", "Penyakit Diare Akut", "Bila pasien keadaan umum baik baik tidak dehidrasi, asupan cairan dengan minuman ringan, sari buah, sup dan keripik asin. Bila pasien kehilangan cairan yang banyak dan dehidrasi dapat memberikan cairan isotonik mengandung elektrolit dan gula atau starch harus diberikan", "Diare adalah buang air besar (defakasi) dengan tinja berbentuk cair atau setengah cair (setengah padat), kandungan air tinjah lebih banyak dari biasanya lebih dari 200 gram atau 200 ml/24 jam. Definisi lain memakai kriteria frekuensi, yaitu buang air besar encer lebih dari 3 kali per hari. Buang air besar encer tersebut dapat atau tanpa di sertai lendir dan darah. Diare akut yaitu diare yang berlangsung kurang dari 15 hari, sedangkan menurut World Gastroenterology Organisation global guidelenis 2005, diare akut di definisikan sebagai pasase tinja yang cair  atau lembek dengan jumlah lebih banyak dari normal, berlangsung kurang dari 14 hari.", "img_diare_akut"));
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P10", "Penyakit Diare Kronis", "Bila pasien keadaan umum baik baik tidak dehidrasi, asupan cairan dengan minuman ringan, sari buah, sup dan keripik asin. Bila pasien kehilangan cairan yang banyak dan dehidrasi dapat memberikan cairan isotonik mengandung elektrolit dan gula atau starch harus diberikan", "Diare kronik adalah diare yang berlangsung lebih dari 15 hari. Sebenarnya para pakar di dunia telah mengajukan beberapa kriteria mengenai batasan kronik pada kasus diare tersebut, ada yang 15 hari, 3 minggu, 1 bulan dan 3 bulan, tetapi di indonesia dipilih waktu lebih 15 hari agar dokter tidak lengah, dapat lebih cepat menginvestigasi penyebab diare kronik dengan lebih cepat.","img_diare_kronik"));
@@ -168,17 +177,38 @@ public class SplashScreenActivity extends AppCompatActivity {
         SQLiteHelper.getInstance(this).addGejala(new Gejala("", "E18", "Pertumbuhan Terhambat"));
         SQLiteHelper.getInstance(this).addGejala(new Gejala("", "E19", "Diare Berdarah terus menerus"));
         SQLiteHelper.getInstance(this).addGejala(new Gejala("", "E20", "Batuk"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G47", "Nafsu Makan Berkurang"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G48", "Lemas"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G49", "Demam"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G50", "Muntah"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G51", "Diare Kunign"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G52", "Kemerahan Pada Kulit"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G53", "Pendarahan di Bagian Permukaan Kulit"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G54", "Kejang"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G55", "Gatal-Gatal"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G56", "Muncul Bintik Merah"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G57", "Ada Nanah di Kulit"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G58", "Diare Putih"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G59", "Bulu Berdiri"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G60", "Bengkak di Persendian"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G61", "Sulit Berjalan"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G62", "Gemetar"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G63", "Bulu Kusam"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G64", "Pertumbuhan Terhambat"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G65", "Diare Berdarah terus menerus"));
+//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G66", "Batuk"));
+
     }
 
     private void queryKeputusan(){
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P1","G47,G48,G49,G50,G51,G52,G53,G54", ""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P2","G47,G52,G55,G56,G57",""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P3","G47,G48,G49,G58,G59", ""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P4","G47,G48,G49,G60,G61,G62", ""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P5","G47,G49,G53,G55,G56,G60",""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P6","G47,G48,G63,G64,G65",""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P7","G52,G59,G64",""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P8","G47,G48,G49,G51,G66",""));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E1,E2,E3,E4,E5,E6,E9", "0.5"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H2","E1,E6,E9,E10,E11","0.6"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H3","E1,E2,E12,E13", "0.6"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H4","E1,E2,E3,E14,E15,E16", "0.7"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H5","E1,E3,E6,E9,E10,E14","0.5"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H6","E1,E2,E17,E18,E19","0.4"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H7","E5,E13,E18","0.35"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H8","E1,E2,E3,E5,E20","0.3"));
         /*
         SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P9","G1,G3,G14,G22,G25,G33,G41,G43,G46,G51,",""));
         SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P10","G3,G5,G6,G15,G22,G51,G64,G66",""));
