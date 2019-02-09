@@ -143,9 +143,8 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
         mapProbability.put("H8-E20", .5d);
 
         List<String> test = new LinkedList<>();
-        test.add("E1");
-        test.add("E3");
-        test.add("E6");
+        for (String s : results)
+            test.add(s);
 
         double TotalProbabilitas = 0d;
         List<Penyakit> penyakits = SQLiteHelper.getInstance(this).getPenyakits();
@@ -168,10 +167,11 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
                 vH = mapProbability.get(penyakit.getKode());
 
             probababilitasExH = probababilitasExH * vH;
-            Log.d("P(" +keyH +"|"+ test.toString()+") ", "= "+probababilitasExH );
+            Log.d("P(" +keyH+") ", "= "+probababilitasExH );
             TotalProbabilitas = TotalProbabilitas + probababilitasExH;
         }
 
+        Log.d("TotalProbabilitas", "="+ TotalProbabilitas);
         ArrayList<String> resultnya = new ArrayList<>();
 
         for (Penyakit penyakit : penyakits) {
