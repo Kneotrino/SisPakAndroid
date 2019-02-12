@@ -5,20 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.meigel.sispak.views.activities.ResultDiagnoseActivity">
-    <include
-        layout="@layout/toolbar"/>
-    <ListView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_above="@+id/btnBack"
-        android:id="@+id/listPenyakit"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/pink"
-        android:text="Pilih Gejala Lagi"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/white"
-        android:id="@+id/btnBack"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pink"
+            android:gravity="center"
+            android:text=" Kemungkinan Penyakit dengan nilai probabilitas terbesar"
+            android:textAppearance="@style/TextAppearance.AppCompat.Inverse" />
+
+        <TextView
+            android:id="@+id/textViewHasilPersen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pink"
+            android:gravity="center"
+            android:text="00,00%"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse" />
+
+        <TextView
+            android:id="@+id/textViewHasilMax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pink"
+            android:gravity="center"
+            android:text=" Penyakit"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Nilai Probabilitas Tiap Penyakit"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <ListView
+            android:id="@+id/listPenyakit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pink"
+            android:text="Pilih Gejala Lagi"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse" />
+    </LinearLayout>
+
 </RelativeLayout>

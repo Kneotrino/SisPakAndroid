@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.meigel.sispak.R;
 import com.example.meigel.sispak.helpers.SQLiteHelper;
@@ -28,6 +29,7 @@ import java.util.Set;
 public class ResultDiagnoseActivity extends AppCompatActivity {
     private String[] results;
     private ListView listView;
+    private TextView textViewHasil, textViewPersen;
     private HashMap<String, ArrayList<String>> chains = new HashMap<>();
     private Toolbar toolbar;
     private Button btnBack;
@@ -51,6 +53,8 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
 
     private void setupView(){
         listView = (ListView)findViewById(R.id.listPenyakit);
+        textViewHasil = (TextView) findViewById(R.id.textViewHasilMax);
+        textViewPersen = (TextView) findViewById(R.id.textViewHasilPersen);
         btnBack = (Button)findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,6 +227,12 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
         Collections.reverse(penyakits);
         Collections.reverse(resultnya);
         System.out.println("keySet = " + keySet);
+
+        Penyakit pp = penyakits.get(0);
+        if (pp != null) {
+            textViewPersen.setText(toPercentage(pp.getP(),2));
+            textViewHasil.setText(pp.getName());
+        }
 
 
         ArrayAdapter<String> diagnoseAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, resultnya);
