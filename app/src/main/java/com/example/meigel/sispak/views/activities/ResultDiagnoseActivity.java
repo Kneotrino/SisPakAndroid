@@ -1,8 +1,8 @@
 package com.example.meigel.sispak.views.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +17,10 @@ import com.example.meigel.sispak.models.Keputusan;
 import com.example.meigel.sispak.models.Penyakit;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -147,7 +150,8 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
             test.add(s);
 
         double TotalProbabilitas = 0d;
-        List<Penyakit> penyakits = SQLiteHelper.getInstance(this).getPenyakits();
+        final List<Penyakit> penyakits = SQLiteHelper.getInstance(this).getPenyakits();
+
         for (Penyakit penyakit : penyakits) {
             double probababilitasExH = 1d;
             String keyH = penyakit.getKode();
@@ -193,41 +197,32 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
                 vH = mapProbability.get(penyakit.getKode());
             probababilitasExH = probababilitasExH * vH;
             double value = probababilitasExH / TotalProbabilitas;
-//            System.out.println("P(" +keyH +"|"+ test.toString()+") / TotalProbabilitas= "+ value);
             Log.d("P(" +keyH +"|"+ test.toString()+") ", "= "+value );
-
-
-            int persen = (int) Math.ceil(((probababilitasExH/TotalProbabilitas)) * 100);
-            resultnya.add(persen + " % " + penyakit.getName());
-
+            double p = probababilitasExH/TotalProbabilitas;
+//            resultnya.add(toPercentage(p,2)+ " % " + penyakit.getName());
+            penyakit.setP(p);
         }
 
+//        final Set<String> keySet = chains.keySet();
+        final Set<String> keySet = new HashSet<>();
 
 
-        final Set<String> keySet = chains.keySet();
-//        for(String key : keySet){
-//            float ms = Float.parseFloat(chains.get(key).get(0));
-//            Log.d("MainApp","ms : " + ms);
-//            float ma = chains.get(key).size() - 1;
-//            Log.d("MainApp","ma : " + ma);
-//            int pa = (int) Math.ceil((1 - (ma/ms)) * 100);
-////            float pa = ma / ms * 100;
-//            Log.d("MainApp","Pa : " + pa);
-//            String namaPenyakit = SQLiteHelper.getInstance(this).getPenyakit(key).getKode();
-//            Log.d("MainApp","Penyakit : " + namaPenyakit + " Code : " + key);
-//            Log.d("MainApp","=======================");
-//            resultnya.add((int)pa + " % " + namaPenyakit);
-//        }
+        Collections.sort(penyakits, new ProbabilityComparator());
 
+        System.out.println(penyakits.size());
+        for (Penyakit penyakit : penyakits) {
+            resultnya.add(toPercentage(penyakit.getP(),2)+ " % " + penyakit.getName());
+            keySet.add(penyakit.getKode());
+            System.out.println(penyakit.getKode());
+        }
+//        Collections.sort(resultnya);
+//        Collections.reverse(resultnya);
 
-//        resultnya.add("48% Hog Cholere");
-//        resultnya.add("51% Erysipelas");
+//        System.out.println("resultnya = " + resultnya);
 
-        System.out.println("resultnya = " + resultnya);
+        Collections.reverse(penyakits);
+        Collections.reverse(resultnya);
         System.out.println("keySet = " + keySet);
-
-
-
 
 
         ArrayAdapter<String> diagnoseAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, resultnya);
@@ -236,14 +231,25 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(ResultDiagnoseActivity.this, DetailDataActivity.class);
-                i.putExtra("id",(String)keySet.toArray()[position]);
+                i.putExtra("id", penyakits.get(position).getKode());
+//                i.putExtra("id",(String)keySet.toArray()[position]);
                 startActivity(i);
             }
         });
     }
-
+    public static String toPercentage(double n, int digits){
+        return String.format("%."+digits+"f",n*100)+"%";
+    }
+    class ProbabilityComparator implements Comparator<Penyakit> {
+        @Override
+        public int compare(Penyakit a, Penyakit b) {
+            return a.getP() < b.getP() ? -1 : a.getP() == b.getP() ? 0 : 1;
+        }
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
 }
+
+

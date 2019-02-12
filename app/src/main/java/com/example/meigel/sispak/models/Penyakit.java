@@ -7,6 +7,15 @@ package com.example.meigel.sispak.models;
 public class Penyakit {
     private int id;
     private String kode,name,penanganan,desc,img;
+    private double p;
+
+    public double getP() {
+        return p;
+    }
+
+    public void setP(double p) {
+        this.p = p;
+    }
 
     public Penyakit(int id, String kode, String name, String penanganan, String desc, String img) {
         this.id = id;
