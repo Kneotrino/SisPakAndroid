@@ -21,13 +21,14 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:id="@+id/btnDiagnose">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
+                android:background="@color/pink"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/ic_konsultasi"
-                android:background="@color/colorAccent"/>
+                android:src="@drawable/ic_konsultasi" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,13 +50,14 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:id="@+id/btnPenyakit">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
+                android:background="@color/pink"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/ic_penyakit"
-                android:background="@color/colorAccent"/>
+                android:src="@drawable/ic_penyakit" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,13 +72,14 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:id="@+id/btnArtikel">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
+                android:background="@color/pink"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/ic_berita"
-                android:background="@color/colorAccent"/>
+                android:src="@drawable/ic_berita" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,13 +100,14 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:id="@+id/btnBantuan">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
+                android:background="@color/pink"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/ic_info"
-                android:background="@color/colorAccent"/>
+                android:src="@drawable/ic_info" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,13 +122,14 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:id="@+id/btnKeluar">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
+                android:background="@color/pink"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/ic_feedback"
-                android:background="@color/colorAccent"/>
+                android:src="@drawable/ic_feedback" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

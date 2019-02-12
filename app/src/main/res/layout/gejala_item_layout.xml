@@ -3,8 +3,9 @@
     android:id="@+id/txtCheckGejala"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeightSmall"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:gravity="center_vertical"
     android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+    android:checked="false"
+    android:gravity="center_vertical"
     android:paddingLeft="?android:attr/listPreferredItemPaddingStart"
-    android:paddingRight="?android:attr/listPreferredItemPaddingEnd" />
+    android:paddingRight="?android:attr/listPreferredItemPaddingEnd"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall" />
