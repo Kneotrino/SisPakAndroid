@@ -1,9 +1,9 @@
 package com.example.meigel.sispak.views.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.example.meigel.sispak.R;
@@ -12,8 +12,15 @@ import com.example.meigel.sispak.helpers.SessionHelper;
 import com.example.meigel.sispak.models.Gejala;
 import com.example.meigel.sispak.models.Keputusan;
 import com.example.meigel.sispak.models.Penyakit;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 
 public class SplashScreenActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +33,58 @@ public class SplashScreenActivity extends AppCompatActivity {
             queryPenyakit();
             queryGejala();
             queryKeputusan();
-
             SessionHelper.getInstance(this).setAppFirstTime(false);
         }
 
+        CheckUpdate();
+    }
+    private static String url = "https://kliniksip.firebaseio.com/Version/Lastest/apkInfo.json";
+
+    private void CheckUpdate() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashScreenActivity.this, MenuActivity.class);
-                startActivity(i);
-                finish();
+                com.example.meigel.sispak.views.activities.Handler handler =
+                        new com.example.meigel.sispak.views.activities.Handler();
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .build();
+                client.newCall(request)
+                        .enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Request request, IOException e) {
+                                Log.d("Fail",e.getMessage());
+                                String input = "{" +
+                                        "\"path\":\"https://drive.google.com/open?id=1hsJzum9wwi08Tg3UFazH0YGbUMsMjDll\"," +
+                                        "\"versionCode\":1," +
+                                        "\"versionName\":\"Dasar\"}";
+                                Intent i = new Intent(SplashScreenActivity.this, MenuActivity.class);
+                                i.putExtra("Rest",input);
+                                startActivity(i);
+                                finish();
+
+                            }
+                            @Override
+                            public void onResponse(Response response) throws IOException {
+                                String resp = response.body().string();
+                                System.out.println("resp = " + resp);
+                                Intent i = new Intent(SplashScreenActivity.this, MenuActivity.class);
+                                i.putExtra("Rest",resp);
+                                startActivity(i);
+                                finish();
+                            }
+                        });
+
+
+
             }
-        }, 3000);
+        }, 5000);
+
+
     }
+
+
     /*
         private void queryHospital(){
             SQLiteHelper.getInstance(this).addHospital(new Hospital("RSU. Dr. Saiful Anwar", "Klojen", "Jalan Jaksa Agung Suprapto No.2, Kota Malang, Jawa Timur 65112", "(0623) 4362101", "Minggu-Sabtu 24 Jam", "-7.972159", "112.631648"));
