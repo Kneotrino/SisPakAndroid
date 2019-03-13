@@ -61,7 +61,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
     public void cekUpdate(String json) {
-        versionCode = 1;
+        versionCode = 2;
         System.out.println("versionCode = " + versionCode);
         try {
             JSONObject reader = new JSONObject(json);

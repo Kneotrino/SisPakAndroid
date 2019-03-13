@@ -37,6 +37,8 @@
             android:background="@color/pink"
             android:gravity="center"
             android:text=" Penyakit"
+            android:onClick="onClick"
+            android:clickable="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse" />
 
         <TextView

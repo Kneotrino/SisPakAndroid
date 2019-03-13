@@ -1,5 +1,6 @@
 package com.example.meigel.sispak.views.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -175,7 +176,6 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
                 vH = mapProbability.get(penyakit.getKode());
 
             probababilitasExH = probababilitasExH * vH;
-            Log.d("P(" +keyH+") ", "= "+probababilitasExH );
             TotalProbabilitas = TotalProbabilitas + probababilitasExH;
         }
 
@@ -213,11 +213,9 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
 
         Collections.sort(penyakits, new ProbabilityComparator());
 
-        System.out.println(penyakits.size());
         for (Penyakit penyakit : penyakits) {
             resultnya.add(toPercentage(penyakit.getP(),2)+ " % " + penyakit.getName());
             keySet.add(penyakit.getKode());
-            System.out.println(penyakit.getKode());
         }
 //        Collections.sort(resultnya);
 //        Collections.reverse(resultnya);
@@ -226,12 +224,22 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
 
         Collections.reverse(penyakits);
         Collections.reverse(resultnya);
-        System.out.println("keySet = " + keySet);
 
         Penyakit pp = penyakits.get(0);
         if (pp != null) {
             textViewPersen.setText(toPercentage(pp.getP(),2));
             textViewHasil.setText(pp.getName());
+            textClick = pp.getKode();
+            System.out.println("pp.getP() = " + pp.getP());
+
+            if ( Double.isNaN(pp.getP()))
+            {
+                new AlertDialog.Builder(this)
+                        .setTitle("Kesalahan Probabilitas")
+                        .setMessage("Silahkan tunggu perbaruan senlanjutnya")
+                        .create()
+                        .show();
+            }
         }
 
 
@@ -246,10 +254,22 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
     }
     public static String toPercentage(double n, int digits){
         return String.format("%."+digits+"f",n*100)+"%";
     }
+
+
+    String textClick = "";
+    public void onClick(View view) {
+        Intent i = new Intent(ResultDiagnoseActivity.this, DetailDataActivity.class);
+        i.putExtra("id", textClick);
+        startActivity(i);
+
+    }
+
     class ProbabilityComparator implements Comparator<Penyakit> {
         @Override
         public int compare(Penyakit a, Penyakit b) {

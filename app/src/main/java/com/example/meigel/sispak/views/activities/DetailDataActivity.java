@@ -12,7 +12,12 @@ import com.example.meigel.sispak.helpers.SQLiteHelper;
 import com.example.meigel.sispak.models.Penyakit;
 
 public class DetailDataActivity extends AppCompatActivity {
-    private TextView txtPenanganan,txtDesc;
+    private TextView txtPenanganan
+            ,txtDesc
+            ,txtDesc1
+            ,txtDesc2
+            ,txtDesc3
+            ;
     private ImageView imgPenyakit;
     private Toolbar toolbar;
 
@@ -23,6 +28,9 @@ public class DetailDataActivity extends AppCompatActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         txtPenanganan = (TextView)findViewById(R.id.txtPenanganan);
         txtDesc = (TextView)findViewById(R.id.txtDesc);
+        txtDesc1 = (TextView)findViewById(R.id.txtDesc1);
+        txtDesc2 = (TextView)findViewById(R.id.txtDesc2);
+        txtDesc3 = (TextView)findViewById(R.id.txtDesc3);
         imgPenyakit = (ImageView)findViewById(R.id.imgPenyakit);
         setupData();
     }
@@ -34,6 +42,9 @@ public class DetailDataActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(penyakit.getKode());
         txtPenanganan.setText(penyakit.getPenanganan());
         txtDesc.setText(penyakit.getDesc());
+        txtDesc1.setText(penyakit.getDesc1());
+        txtDesc2.setText(penyakit.getDesc2());
+        txtDesc3.setText(penyakit.getDesc3());
         imgPenyakit.setImageResource(getResources().getIdentifier(penyakit.getImg(),"drawable",getPackageName()));
     }
 }

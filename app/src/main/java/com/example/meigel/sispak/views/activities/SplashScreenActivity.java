@@ -35,7 +35,6 @@ public class SplashScreenActivity extends AppCompatActivity {
             queryKeputusan();
             SessionHelper.getInstance(this).setAppFirstTime(false);
         }
-
         CheckUpdate();
     }
     private static String url = "https://kliniksip.firebaseio.com/Version/Lastest/apkInfo.json";
@@ -79,7 +78,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 
             }
-        }, 5000);
+        }, 3000);
 
 
     }
@@ -112,7 +111,19 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
     */
     private void queryPenyakit(){
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H1", "Penyakit Hog Cholera", "Segera menghubungi dokter", "Gastritis adalah proses inflasi pada mukosa dan submokasa lambung. Gastritis merupakan gangguan kesehatan yang paling sering dijumpai di klinik, karena diagnosanya sering hanya berdasarkan gejala klinis bukan pemeriksaan histopatologi.","imgicon"));
+        SQLiteHelper
+                .getInstance(this)
+                .addPenyakit(
+                        new Penyakit(
+                                "H1",
+                                "Penyakit Hog Cholera",
+                                "Segera menghubungi dokter",
+                                "Gastritis adalah proses inflasi pada mukosa dan submokasa lambung. Gastritis merupakan gangguan kesehatan yang paling sering dijumpai di klinik, karena diagnosanya sering hanya berdasarkan gejala klinis bukan pemeriksaan histopatologi.",
+                                "img_icon",
+                                "Keteranagan 1",
+                                "Keteranagan 2",
+                                "Keterangaan 3"
+                        ));
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H2","Penyakit Cacar Babi","Perbaikan pola hidup, perbaikan pola makan dan minum, perbaikan pola atau cara defekasi. Memperbaiki defekasi merupakan pengobatan yang selalu harus ada dalam setiap bentuk dan derajat hemoroid.","Hemoroid merupakan pelebaran dan inflasi pembuluh darah vena di daerah anus yang berasal dari plexus hemorrhoidalis. Di badeah atau di luar linea dentate pelebaran vena yang berada di bawah kulit (subkutan) di sebut hemorid eksternal. Sedangkan di atas atau di dalam linea dentate, pelebaran vena yang berada di bawan mukosa (submukosa) di sebut hemoroid internal. Biasanya struktur anatomis anal canal masih normal.","imgicon"));
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H3","Penyakit Colibasilosis", "Segera menghubungi dokter.", "Tukak gaster adalah suatu gambaran bulat atau semi bulat/oval, ukuran > 5 mm kedalaman submukosal pada mukosa lambung akibat terputusnya kontinuitas/integritas mukosa lambung. Tukas gaster merupkan luka terbuka dengan pinggir edema disertai indurasi dengan dasar ditutupi debris.","imgicon"));
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H4", "Penyakit Streptococosis", "Pemberian diet yang mudah cerna khususnya pada tukak yang aktif perlu dilakukan. Makan dalam jumlah sedikit dan lebih sering, lebih baik dari pada makan yang sekaligus kenyang. Mengurangi makanan yang merangsang pengeluaran asam lambung atau pepsin, makanan yang merangsang timbulnya nyeri dan zat-zat lain yang dapat mengganggu pertahanan mukosa gastroduedenal.", "Tukak duodenum secara anatomis didefinisikan sebagai suatu defek mukosa/submokusa yang terbatas tegas dapat menembus muskularis mukosa sampai lapisan serosa sehingga dapat terjadi perforasi. Secara klinis, suatu tukak adalah hilangnya epitel superfisial atau lapisan lebih dalam dengan diameter > 5 mm yang dapat diamati secara endoskopsis atau radiologis. ", "imgicon"));
