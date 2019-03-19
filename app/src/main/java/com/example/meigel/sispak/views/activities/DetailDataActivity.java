@@ -43,6 +43,8 @@ public class DetailDataActivity extends AppCompatActivity {
         txtPenanganan.setText(penyakit.getPenanganan());
         txtDesc.setText(penyakit.getDesc());
         txtDesc1.setText(penyakit.getDesc1());
+        System.out.println("penyakit.getDesc1() = " + penyakit.getDesc1());
+
         txtDesc2.setText(penyakit.getDesc2());
         txtDesc3.setText(penyakit.getDesc3());
         imgPenyakit.setImageResource(getResources().getIdentifier(penyakit.getImg(),"drawable",getPackageName()));

@@ -44,6 +44,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     //private static final String KEY_KEC = "kec";
     private static final String KEY_PENANGANAN = "penanganan";
     private static final String KEY_DESC = "desc";
+    private static final String KEY_DESC1 = "desc1";
+    private static final String KEY_DESC2 = "desc2";
+    private static final String KEY_DESC3 = "desc3";
     private static final String KEY_KODE = "code";
     //private static final String KEY_TITLE = "title";
     //private static final String KEY_CATEGORY = "category";
@@ -84,6 +87,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 + KEY_NAME + " TEXT,"
                 + KEY_PENANGANAN + " TEXT,"
                 + KEY_DESC + " TEXT,"
+                + KEY_DESC1 + " TEXT,"
+                + KEY_DESC2 + " TEXT,"
+                + KEY_DESC3 + " TEXT,"
                 + KEY_IMG + " TEXT" + ")";
 /*
         String CREATE_ARTIKEL_TBL = "CREATE TABLE " + TABLE_ARTIKEL + "("
@@ -119,8 +125,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PENYAKIT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_GEJALA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_KEPUTUSAN);
-
         onCreate(db);
+    }
+
+    public void  onUpdate()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + TABLE_PENYAKIT);
+//        onCreate(db);
     }
 /*
     //CRUD HOSPITAL
@@ -320,6 +332,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_KODE, penyakit.getKode());
         values.put(KEY_PENANGANAN, penyakit.getPenanganan());
         values.put(KEY_DESC, penyakit.getDesc());
+        values.put(KEY_DESC1, penyakit.getDesc1());
+        values.put(KEY_DESC2, penyakit.getDesc2());
+        values.put(KEY_DESC3, penyakit.getDesc3());
         values.put(KEY_IMG, penyakit.getImg());
 
         db.insert(TABLE_PENYAKIT, null, values);
@@ -329,7 +344,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public Penyakit getPenyakit(String code){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_PENYAKIT, new String[] { KEY_PENYAKIT_ID, KEY_NAME, KEY_KODE, KEY_PENANGANAN, KEY_DESC, KEY_IMG}, KEY_KODE + "=?",
+        Cursor cursor = db.query(TABLE_PENYAKIT,
+                new String[] {
+                        KEY_PENYAKIT_ID,
+                        KEY_NAME,
+                        KEY_KODE,
+                        KEY_PENANGANAN,
+                        KEY_DESC,
+                        KEY_DESC1,
+                        KEY_DESC2,
+                        KEY_DESC3,
+                        KEY_IMG}, KEY_KODE + "=?",
                 new String[] { code }, null, null, null, null);
         if(cursor != null)
             cursor.moveToFirst();
@@ -339,7 +364,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 cursor.getString(2),
                 cursor.getString(3),
                 cursor.getString(4),
-                cursor.getString(5)
+                cursor.getString(5),
+                cursor.getString(6),
+                cursor.getString(7),
+                cursor.getString(8)
         );
 
         return penyakit;
@@ -361,7 +389,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                         cursor.getString(2),
                         cursor.getString(3),
                         cursor.getString(4),
-                        cursor.getString(5)
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getString(7),
+                        cursor.getString(8)
                 );
                 penyakits.add(penyakit);
             } while (cursor.moveToNext());

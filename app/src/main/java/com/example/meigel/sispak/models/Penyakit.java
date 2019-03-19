@@ -41,6 +41,18 @@ public class Penyakit {
         this.desc3 = desc3;
     }
 
+    public Penyakit(int id, String kode, String name, String penanganan, String desc,  String desc1, String desc2, String desc3, String img) {
+        this.id = id;
+        this.kode = kode;
+        this.name = name;
+        this.penanganan = penanganan;
+        this.desc = desc;
+        this.img = img;
+        this.desc1 = desc1;
+        this.desc2 = desc2;
+        this.desc3 = desc3;
+    }
+
     public Penyakit(String kode, String name, String penanganan, String desc, String img, String desc1, String desc2, String desc3) {
         this.kode = kode;
         this.name = name;

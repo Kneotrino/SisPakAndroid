@@ -30,13 +30,26 @@ public class SplashScreenActivity extends AppCompatActivity {
         if(SessionHelper.getInstance(this).getAppFirstTime()){
             Log.d("MainApp","First session");
             //queryHospital();
-            queryPenyakit();
             queryGejala();
             queryKeputusan();
+            queryPenyakit();
             SessionHelper.getInstance(this).setAppFirstTime(false);
+        }
+        else {
+            Log.d("MainApp","Not First session");
+            SQLiteHelper.getInstance(this).onUpdate();
+            queryPenyakit();
+
+
         }
         CheckUpdate();
     }
+
+    private void queryDelete() {
+//            SQLiteHelper.getInstance(this).onUpdate();
+
+    }
+
     private static String url = "https://kliniksip.firebaseio.com/Version/Lastest/apkInfo.json";
 
     private void CheckUpdate() {
@@ -111,6 +124,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
     */
     private void queryPenyakit(){
+
         SQLiteHelper
                 .getInstance(this)
                 .addPenyakit(
@@ -120,9 +134,9 @@ public class SplashScreenActivity extends AppCompatActivity {
                                 "Segera menghubungi dokter",
                                 "Gastritis adalah proses inflasi pada mukosa dan submokasa lambung. Gastritis merupakan gangguan kesehatan yang paling sering dijumpai di klinik, karena diagnosanya sering hanya berdasarkan gejala klinis bukan pemeriksaan histopatologi.",
                                 "img_icon",
-                                "Keteranagan 1",
-                                "Keteranagan 2",
-                                "Keterangaan 3"
+                                "Penyebab",
+                                "Pencegahan",
+                                "Pengobatan"
                         ));
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H2","Penyakit Cacar Babi","Perbaikan pola hidup, perbaikan pola makan dan minum, perbaikan pola atau cara defekasi. Memperbaiki defekasi merupakan pengobatan yang selalu harus ada dalam setiap bentuk dan derajat hemoroid.","Hemoroid merupakan pelebaran dan inflasi pembuluh darah vena di daerah anus yang berasal dari plexus hemorrhoidalis. Di badeah atau di luar linea dentate pelebaran vena yang berada di bawah kulit (subkutan) di sebut hemorid eksternal. Sedangkan di atas atau di dalam linea dentate, pelebaran vena yang berada di bawan mukosa (submukosa) di sebut hemoroid internal. Biasanya struktur anatomis anal canal masih normal.","imgicon"));
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H3","Penyakit Colibasilosis", "Segera menghubungi dokter.", "Tukak gaster adalah suatu gambaran bulat atau semi bulat/oval, ukuran > 5 mm kedalaman submukosal pada mukosa lambung akibat terputusnya kontinuitas/integritas mukosa lambung. Tukas gaster merupkan luka terbuka dengan pinggir edema disertai indurasi dengan dasar ditutupi debris.","imgicon"));
@@ -131,6 +145,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H6", "Penyakit Koksidiosis", "Segera menghubungi dokter", "Dispepsia fungsional adalah keluhan yang berhubungan dengan makan atau keluhan yang oleh pasien ataupun dokternya dikaitkan dengan gangguan saluran cerna bagian atas. Dalam konsensus Roma II tahun 2000, disepakati bahwa definisi dispepsia sebagai dyspepsia ferers to pain or discomfort centered in the upper abdomen. Formulasi keluhan nyeri atau tidak nyaman menjadi sesuatu yang relatif, terlebih lagi bila diekspresikan dalam bahasa yang berbeda.", "imgicon"));
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H7", "Penyakit Ascariasis", "Konsumsi air yang meningkat disertai olahraga rutin, menghindari beberapa makanan dan minuman seperti gandum, susu, kafein, bawang, coklat dan beberapa sayur-sayuran, bisa mengkonsumsi lagi setalah 3 bulan dengan jumlah diberikan secara bertahap", "Irritable bowel syndrome adalah satu penyakit gastrointestinal fungsional. Adanya nyeri perut, distensi dan gangguan pola defakasi tanpa gangguan organik.", "imgicon"));
         SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H8", "Penyakit Salmonellosis", "Meninggikan posisi kepala pada saat tidur serta menghindari makan sebelum tidur, berhenti merokok dan mengkonsumsi alkohol, mengurangi konsumsi lemak, menurunkan berat badan pada pasien kegemukan serta menghindari pemakaian ketat, menghindari makanan atau minuman seperti coklat, teh, peppermint, kopi dan minuman bersoda", "Refluks gastroesofagel adalah suatu keadaan patologis sebagai akibat refluks kandungan lambung ke dalam esofagus, dengan berbagai gejala yang timbul akibat keterlibatan esofagus, faring, laring dan saluran nafas.", "imgicon"));
+//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H9", "Penyakit", "Meninggikan posisi kepala pada saat tidur serta menghindari makan sebelum tidur, berhenti merokok dan mengkonsumsi alkohol, mengurangi konsumsi lemak, menurunkan berat badan pada pasien kegemukan serta menghindari pemakaian ketat, menghindari makanan atau minuman seperti coklat, teh, peppermint, kopi dan minuman bersoda", "Refluks gastroesofagel adalah suatu keadaan patologis sebagai akibat refluks kandungan lambung ke dalam esofagus, dengan berbagai gejala yang timbul akibat keterlibatan esofagus, faring, laring dan saluran nafas.", "imgicon"));
+
+
+
 //        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P1", "Penyakit Hog Cholera", "Segera menghubungi dokter", "Gastritis adalah proses inflasi pada mukosa dan submokasa lambung. Gastritis merupakan gangguan kesehatan yang paling sering dijumpai di klinik, karena diagnosanya sering hanya berdasarkan gejala klinis bukan pemeriksaan histopatologi.","imgicon"));
 //        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P2","Penyakit Cacar Babi","Perbaikan pola hidup, perbaikan pola makan dan minum, perbaikan pola atau cara defekasi. Memperbaiki defekasi merupakan pengobatan yang selalu harus ada dalam setiap bentuk dan derajat hemoroid.","Hemoroid merupakan pelebaran dan inflasi pembuluh darah vena di daerah anus yang berasal dari plexus hemorrhoidalis. Di badeah atau di luar linea dentate pelebaran vena yang berada di bawah kulit (subkutan) di sebut hemorid eksternal. Sedangkan di atas atau di dalam linea dentate, pelebaran vena yang berada di bawan mukosa (submukosa) di sebut hemoroid internal. Biasanya struktur anatomis anal canal masih normal.","imgicon"));
 //        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P3","Penyakit Colibasilosis", "Segera menghubungi dokter.", "Tukak gaster adalah suatu gambaran bulat atau semi bulat/oval, ukuran > 5 mm kedalaman submukosal pada mukosa lambung akibat terputusnya kontinuitas/integritas mukosa lambung. Tukas gaster merupkan luka terbuka dengan pinggir edema disertai indurasi dengan dasar ditutupi debris.","imgicon"));
