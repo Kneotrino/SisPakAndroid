@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.meigel.sispak.R;
 
 public class BantuanFragment extends Fragment {
-    private String[] imgBantuans = {"ic_konsultasi_white","ic_penyakit_white","ic_berita_white","ic_info_white","ic_feedback_white"};
+    private String[] imgBantuans = {"doctorwhite","diagnosticwhite","informationwhite","userwhite","logoutwhite"};
     private String[] textBantuan = {"Menu Diagnosa ", "Menu Penyakit","Menu Bantuan","Menu Tentang","Menu Keluar"};
     private TextView txtBantuan;
     private ImageView imgBantuan;

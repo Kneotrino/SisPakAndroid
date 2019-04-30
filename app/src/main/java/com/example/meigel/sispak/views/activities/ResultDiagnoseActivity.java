@@ -164,7 +164,7 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
                 String key = keyH+"-"+s;
                 Double vE = 0d;
                 if  ( mapProbability.get(key) == null)
-                    vE = 0d;
+                    vE = .25d;
                 else
                     vE = mapProbability.get(key);
                 probababilitasExH = probababilitasExH * vE;
@@ -189,14 +189,14 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
                 String key = keyH+"-"+s;
                 Double vE = 0d;
                 if  ( mapProbability.get(key) == null)
-                    vE = 0d;
+                    vE = .25d;
                 else
                     vE = mapProbability.get(key);
                 probababilitasExH = probababilitasExH * vE;
             }
             Double vH = 0d;
             if  ( mapProbability.get(penyakit.getKode()) == null)
-                vH = 0d;
+                vH = .25d;
             else
                 vH = mapProbability.get(penyakit.getKode());
             probababilitasExH = probababilitasExH * vH;
@@ -236,7 +236,7 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
             {
                 new AlertDialog.Builder(this)
                         .setTitle("Kesalahan Probabilitas")
-                        .setMessage("Silahkan tunggu perbaruan senlanjutnya")
+                        .setMessage("Silahkan tunggu pembaruan selanjutnya")
                         .create()
                         .show();
             }

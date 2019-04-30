@@ -29,7 +29,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         if(SessionHelper.getInstance(this).getAppFirstTime()){
             Log.d("MainApp","First session");
-            //queryHospital();
             queryGejala();
             queryKeputusan();
             queryPenyakit();
@@ -37,10 +36,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
         else {
             Log.d("MainApp","Not First session");
-            SQLiteHelper.getInstance(this).onUpdate();
-            queryPenyakit();
-
-
+//            SQLiteHelper.getInstance(this).onUpdate();
+//            queryPenyakit();
         }
         CheckUpdate();
     }
@@ -68,7 +65,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                             public void onFailure(Request request, IOException e) {
                                 Log.d("Fail",e.getMessage());
                                 String input = "{" +
-                                        "\"path\":\"https://drive.google.com/open?id=1hsJzum9wwi08Tg3UFazH0YGbUMsMjDll\"," +
+                                        "\"path\":\"https://drive.google.com/drive/folders/1vcUtYW8YQ1uus_ZF9fsA_md6tAd8VTkA\"," +
                                         "\"versionCode\":1," +
                                         "\"versionName\":\"Dasar\"}";
                                 Intent i = new Intent(SplashScreenActivity.this, MenuActivity.class);
@@ -96,33 +93,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     }
 
-
-    /*
-        private void queryHospital(){
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSU. Dr. Saiful Anwar", "Klojen", "Jalan Jaksa Agung Suprapto No.2, Kota Malang, Jawa Timur 65112", "(0623) 4362101", "Minggu-Sabtu 24 Jam", "-7.972159", "112.631648"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RS.Lavalette", "Klojen", "Jl. W.R. Supratman No.10, Rampal Celaket, Klojen, Kota Malang, Jawa Timur 65111", "(0341) 470805", "Minggu-Sabtu 24 Jam", "-7.965457", "112.637899"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RS. Hermina Tangkubanprahu", "Klojen", "Jalan Tangkubanprahu No. 31-33, Kota Malang, Jawa Timur", "(0341) 322525", "Minggu-Sabtu 24 Jam", "-7.977855", "112.624413"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSAB. Muhammadiyah", "Klojen", " Jl. Wahid Hasyim No. 30, Kauman, Klojen, Malang, Kota Malang, Jawa Timur 65119", "(0341) 326222", "Minggu-Sabtu 24 Jam", "-7.984266", "112.628710"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSIA. Husada Bunda", "Klojen", "Jalan Pahlawan Trip No. 2, Oro Oro Dowo, Klojen, Malang, Kota Malang, Jawa Timur 65119", "(0341) 566972", "(0341) 566972", "-7.967657", "112.623437"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSIA. Mardi Waloeja Hauman", "Klojen", "Jl. Kauman No. 23, Kota Malang, Jawa Timur", "(0341) 358508", "Minggu-Sabtu 24 Jam", "-7.982958", "112.627824"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSKB. Manu Husada", "Klojen", "Jl. Sultan Agung No.10-12, Kiduldalem, Klojen, Kota Malang, Jawa Timur 65119", "(0341) 320376", "Minggu-Sabtu 24 Jam", "-7.975992", "-7.975992"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSB. Mardi Waloeja Rampal","Klojen","Jl. W.R. Supratman No.1, Rampal Celaket, Klojen, Kota Malang, Jawa Timur 65111","(0341) 364756","Minggu-Sabtu 24 Jam","-7.964654","112.635232"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSIA. Melati Husada","Klojen","Jl. Kawi No. 32, Jawa Timur","(0341) 364756","Minggu Sabtu 08.00-20.00","-7.975747","112.621333"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSIA Ganesha Medika","Klojen","Jl. Mayjend. Panjaitan, Penanggungan, Malang, Kota Malang, Jawa Timur 65113","(0341) 552955","Minggu-Sabtu 24 Jam","-7.952582","112.619164"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSIA. Mutiara Bunda","Blimbing","Jl. Ciujung, Purwantoro, Malang, Kota Malang, Jawa Timur 65122","(0341) 400403","Minggu-Sabtu 24 Jam","-7.953024","112.641003"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSIA. Puri Bunda","Blimbing","Jalan Simpang Sulfat Utara No. 60 A, Pandanwangi, Blimbing, Kota Malang, Jawa Timur 65126","(0341) 480047","Minggu-Sabtu 24 Jam","-7.958428","112.655431"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("Persada Hospital","Blimbing","Kompleks Araya Business Centre Kav. 2-4, Jalan Panji Suroso, Blimbing, Jawa Timur 65126","(0341) 2996333","Minggu-Sabtu 24 Jam","-7.934335","112.649823"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RS. Panti Waluya","Kedungkandang","Jl. Nusakambangan No.56, Kasin, Kota Malang, Jawa Timur 65117","(0341) 366033","Minggu-Sabtu 24 Jam","-7.986040","112.625053"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSB. Permata Hati","Kedungkandang","Jl. Danau Toba Blok E 6 No.16 - 18, Lesanpuro, Kedungkandang, Kota Malang, Jawa Timur 65138","(0341) 718068","Minggu-Sabtu 24 Jam","-7.980249","112.660673"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSIA. Refa Husada","Kedungkandang","Jl. Mayjend Sungkono No. 9 RT. 005 RW. 004, Tlogowaru, Kedungkandang, Kota Malang, Jawa Timur","(0341) 754075","Minggu-Sabtu 24 Jam","-8.035711","112.642619"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSI. Aisyiyah","Kedungkandang","Jl. Sulawesi No.16, Kasin Kota Malang, Jawa Timur 65117","(0341) 326773","Minggu-Sabtu 24 Jam","-7.988631","112.625520"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RS. Permata Bunda","Lowokwaru","Jalan Soekarno Hatta No. 75, Mojolangu, Lowokwaru, Kota Malang, Jawa Timur 65142","(0341) 326773","Minggu-Sabtu 24 Jam","-7.938598","112.624825"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RS. Permata Bunda","Lowokwaru","Jl. Gajayana No.12, Dinoyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65144","(0341) 326773","Minggu-Sabtu 24 Jam","-7.946579","112.608491"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RSIA. Galeri Candra","Lowokwaru","Jl. Bunga Andong No.3, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65141","(0341) 478571","Minggu-Sabtu 07.00 - 21.00","-7.947584","112.619595"));
-            SQLiteHelper.getInstance(this).addHospital(new Hospital("RST. Dr. Soepraoen","Sukun","Jalan Sudanco Supriadi No. 22, Sukun, Malang, Jawa Timur, 65112","(0341) 325112","Minggu-Sabtu 24 Jam","-7.989513","112.620522"));
-
-        }
-    */
     private void queryPenyakit(){
 
         SQLiteHelper
@@ -131,107 +101,207 @@ public class SplashScreenActivity extends AppCompatActivity {
                         new Penyakit(
                                 "H1",
                                 "Penyakit Hog Cholera",
-                                "Segera menghubungi dokter",
-                                "Gastritis adalah proses inflasi pada mukosa dan submokasa lambung. Gastritis merupakan gangguan kesehatan yang paling sering dijumpai di klinik, karena diagnosanya sering hanya berdasarkan gejala klinis bukan pemeriksaan histopatologi.",
-                                "img_icon",
-                                "Penyebab",
-                                "Pencegahan",
-                                "Pengobatan"
+                                "Vaksinasi dengan serum anti cholera babi atau rovac hog cholera.Sesudah babi umur 6" +
+                                        "minggu, diulangi setahun sekali.Babi-babi dara atau induk sebaiknya 3 minggu sebelum" +
+                                        "dikawinkan, sedang pejantan bisa sewaktu-waktu",
+                                "Hog cholera (HC) merupakan penyakit viral menular terpenting pada babi," +
+                                        "berlangsung subakut, akut atau kronik, dengan proses penyakit yang tidak" +
+                                        "menciri atau bahkan kadang tidak tampak sama sekali.",
+                                "pig",
+                                "Penyebab hog cholera adalah virus single stranded Ribonucleic Acid (ss-" +
+                                        "RNA) dari genus Pestivirus termasuk famili Flaviviridae. Virus HC berada dalam" +
+                                        "genus yang sama dengan virus bovine viral diarrhea (BVD). Virus berbentuk bulat" +
+                                        "helikal atau tidak teratur dan berukuran antara 40-50 nm dengan nukleokapsid" +
+                                        "berukuran 29 nm.",
+                                "Belum ada obat yang efektif untuk mencegah hog cholera.",
+                                "Tindakan yang paling efektif untuk mencegah atau mengendalikan" +
+                                        "penyakit adalah melakukan vaksinasi dengan menggunakan vaksin"+
+                                        "aktif yang sudah diatenuasi. Keberhasilan program vaksinasi sangat" +
+                                        "tergantung dari strain, dosis dan aplikasi vaksin serta status kesehatan" +
+                                        "hewan yang divaksinasi. Pengendalian dapat dilakukan dengan melalui" +
+                                        "tindakan karantina."
                         ));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H2","Penyakit Cacar Babi","Perbaikan pola hidup, perbaikan pola makan dan minum, perbaikan pola atau cara defekasi. Memperbaiki defekasi merupakan pengobatan yang selalu harus ada dalam setiap bentuk dan derajat hemoroid.","Hemoroid merupakan pelebaran dan inflasi pembuluh darah vena di daerah anus yang berasal dari plexus hemorrhoidalis. Di badeah atau di luar linea dentate pelebaran vena yang berada di bawah kulit (subkutan) di sebut hemorid eksternal. Sedangkan di atas atau di dalam linea dentate, pelebaran vena yang berada di bawan mukosa (submukosa) di sebut hemoroid internal. Biasanya struktur anatomis anal canal masih normal.","imgicon"));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H3","Penyakit Colibasilosis", "Segera menghubungi dokter.", "Tukak gaster adalah suatu gambaran bulat atau semi bulat/oval, ukuran > 5 mm kedalaman submukosal pada mukosa lambung akibat terputusnya kontinuitas/integritas mukosa lambung. Tukas gaster merupkan luka terbuka dengan pinggir edema disertai indurasi dengan dasar ditutupi debris.","imgicon"));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H4", "Penyakit Streptococosis", "Pemberian diet yang mudah cerna khususnya pada tukak yang aktif perlu dilakukan. Makan dalam jumlah sedikit dan lebih sering, lebih baik dari pada makan yang sekaligus kenyang. Mengurangi makanan yang merangsang pengeluaran asam lambung atau pepsin, makanan yang merangsang timbulnya nyeri dan zat-zat lain yang dapat mengganggu pertahanan mukosa gastroduedenal.", "Tukak duodenum secara anatomis didefinisikan sebagai suatu defek mukosa/submokusa yang terbatas tegas dapat menembus muskularis mukosa sampai lapisan serosa sehingga dapat terjadi perforasi. Secara klinis, suatu tukak adalah hilangnya epitel superfisial atau lapisan lebih dalam dengan diameter > 5 mm yang dapat diamati secara endoskopsis atau radiologis. ", "imgicon"));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H5", "Penyakit Erysipelas", "Segera menghubungi dokter", "Secara praktis pengertian malnutrisi adalah apabila terjadi penurunan berat badan lebih dari 10% dari berat badan sebelumnya dalam 3 bulan terakhir. Selain kriteria yang sering di gunakan adalah apabila pada saat pengukuran berat badan kurang dari 90% berat badan ideal berdasarkan tinggi badan atau jika indeks massa tubuh (IMT) kurang dari 18,5.", "imgicon"));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H6", "Penyakit Koksidiosis", "Segera menghubungi dokter", "Dispepsia fungsional adalah keluhan yang berhubungan dengan makan atau keluhan yang oleh pasien ataupun dokternya dikaitkan dengan gangguan saluran cerna bagian atas. Dalam konsensus Roma II tahun 2000, disepakati bahwa definisi dispepsia sebagai dyspepsia ferers to pain or discomfort centered in the upper abdomen. Formulasi keluhan nyeri atau tidak nyaman menjadi sesuatu yang relatif, terlebih lagi bila diekspresikan dalam bahasa yang berbeda.", "imgicon"));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H7", "Penyakit Ascariasis", "Konsumsi air yang meningkat disertai olahraga rutin, menghindari beberapa makanan dan minuman seperti gandum, susu, kafein, bawang, coklat dan beberapa sayur-sayuran, bisa mengkonsumsi lagi setalah 3 bulan dengan jumlah diberikan secara bertahap", "Irritable bowel syndrome adalah satu penyakit gastrointestinal fungsional. Adanya nyeri perut, distensi dan gangguan pola defakasi tanpa gangguan organik.", "imgicon"));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H8", "Penyakit Salmonellosis", "Meninggikan posisi kepala pada saat tidur serta menghindari makan sebelum tidur, berhenti merokok dan mengkonsumsi alkohol, mengurangi konsumsi lemak, menurunkan berat badan pada pasien kegemukan serta menghindari pemakaian ketat, menghindari makanan atau minuman seperti coklat, teh, peppermint, kopi dan minuman bersoda", "Refluks gastroesofagel adalah suatu keadaan patologis sebagai akibat refluks kandungan lambung ke dalam esofagus, dengan berbagai gejala yang timbul akibat keterlibatan esofagus, faring, laring dan saluran nafas.", "imgicon"));
-//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("H9", "Penyakit", "Meninggikan posisi kepala pada saat tidur serta menghindari makan sebelum tidur, berhenti merokok dan mengkonsumsi alkohol, mengurangi konsumsi lemak, menurunkan berat badan pada pasien kegemukan serta menghindari pemakaian ketat, menghindari makanan atau minuman seperti coklat, teh, peppermint, kopi dan minuman bersoda", "Refluks gastroesofagel adalah suatu keadaan patologis sebagai akibat refluks kandungan lambung ke dalam esofagus, dengan berbagai gejala yang timbul akibat keterlibatan esofagus, faring, laring dan saluran nafas.", "imgicon"));
-
-
-
-//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P1", "Penyakit Hog Cholera", "Segera menghubungi dokter", "Gastritis adalah proses inflasi pada mukosa dan submokasa lambung. Gastritis merupakan gangguan kesehatan yang paling sering dijumpai di klinik, karena diagnosanya sering hanya berdasarkan gejala klinis bukan pemeriksaan histopatologi.","imgicon"));
-//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P2","Penyakit Cacar Babi","Perbaikan pola hidup, perbaikan pola makan dan minum, perbaikan pola atau cara defekasi. Memperbaiki defekasi merupakan pengobatan yang selalu harus ada dalam setiap bentuk dan derajat hemoroid.","Hemoroid merupakan pelebaran dan inflasi pembuluh darah vena di daerah anus yang berasal dari plexus hemorrhoidalis. Di badeah atau di luar linea dentate pelebaran vena yang berada di bawah kulit (subkutan) di sebut hemorid eksternal. Sedangkan di atas atau di dalam linea dentate, pelebaran vena yang berada di bawan mukosa (submukosa) di sebut hemoroid internal. Biasanya struktur anatomis anal canal masih normal.","imgicon"));
-//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P3","Penyakit Colibasilosis", "Segera menghubungi dokter.", "Tukak gaster adalah suatu gambaran bulat atau semi bulat/oval, ukuran > 5 mm kedalaman submukosal pada mukosa lambung akibat terputusnya kontinuitas/integritas mukosa lambung. Tukas gaster merupkan luka terbuka dengan pinggir edema disertai indurasi dengan dasar ditutupi debris.","imgicon"));
-//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P4", "Penyakit Streptococosis", "Pemberian diet yang mudah cerna khususnya pada tukak yang aktif perlu dilakukan. Makan dalam jumlah sedikit dan lebih sering, lebih baik dari pada makan yang sekaligus kenyang. Mengurangi makanan yang merangsang pengeluaran asam lambung atau pepsin, makanan yang merangsang timbulnya nyeri dan zat-zat lain yang dapat mengganggu pertahanan mukosa gastroduedenal.", "Tukak duodenum secara anatomis didefinisikan sebagai suatu defek mukosa/submokusa yang terbatas tegas dapat menembus muskularis mukosa sampai lapisan serosa sehingga dapat terjadi perforasi. Secara klinis, suatu tukak adalah hilangnya epitel superfisial atau lapisan lebih dalam dengan diameter > 5 mm yang dapat diamati secara endoskopsis atau radiologis. ", "imgicon"));
-//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P5", "Penyakit Erysipelas", "Segera menghubungi dokter", "Secara praktis pengertian malnutrisi adalah apabila terjadi penurunan berat badan lebih dari 10% dari berat badan sebelumnya dalam 3 bulan terakhir. Selain kriteria yang sering di gunakan adalah apabila pada saat pengukuran berat badan kurang dari 90% berat badan ideal berdasarkan tinggi badan atau jika indeks massa tubuh (IMT) kurang dari 18,5.", "imgicon"));
-//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P6", "Penyakit Koksidiosis", "Segera menghubungi dokter", "Dispepsia fungsional adalah keluhan yang berhubungan dengan makan atau keluhan yang oleh pasien ataupun dokternya dikaitkan dengan gangguan saluran cerna bagian atas. Dalam konsensus Roma II tahun 2000, disepakati bahwa definisi dispepsia sebagai dyspepsia ferers to pain or discomfort centered in the upper abdomen. Formulasi keluhan nyeri atau tidak nyaman menjadi sesuatu yang relatif, terlebih lagi bila diekspresikan dalam bahasa yang berbeda.", "imgicon"));
-//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P7", "Penyakit Ascariasis", "Konsumsi air yang meningkat disertai olahraga rutin, menghindari beberapa makanan dan minuman seperti gandum, susu, kafein, bawang, coklat dan beberapa sayur-sayuran, bisa mengkonsumsi lagi setalah 3 bulan dengan jumlah diberikan secara bertahap", "Irritable bowel syndrome adalah satu penyakit gastrointestinal fungsional. Adanya nyeri perut, distensi dan gangguan pola defakasi tanpa gangguan organik.", "imgicon"));
-//        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P8", "Penyakit Salmonellosis", "Meninggikan posisi kepala pada saat tidur serta menghindari makan sebelum tidur, berhenti merokok dan mengkonsumsi alkohol, mengurangi konsumsi lemak, menurunkan berat badan pada pasien kegemukan serta menghindari pemakaian ketat, menghindari makanan atau minuman seperti coklat, teh, peppermint, kopi dan minuman bersoda", "Refluks gastroesofagel adalah suatu keadaan patologis sebagai akibat refluks kandungan lambung ke dalam esofagus, dengan berbagai gejala yang timbul akibat keterlibatan esofagus, faring, laring dan saluran nafas.", "imgicon"));
-
-      /*
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P9", "Penyakit Diare Akut", "Bila pasien keadaan umum baik baik tidak dehidrasi, asupan cairan dengan minuman ringan, sari buah, sup dan keripik asin. Bila pasien kehilangan cairan yang banyak dan dehidrasi dapat memberikan cairan isotonik mengandung elektrolit dan gula atau starch harus diberikan", "Diare adalah buang air besar (defakasi) dengan tinja berbentuk cair atau setengah cair (setengah padat), kandungan air tinjah lebih banyak dari biasanya lebih dari 200 gram atau 200 ml/24 jam. Definisi lain memakai kriteria frekuensi, yaitu buang air besar encer lebih dari 3 kali per hari. Buang air besar encer tersebut dapat atau tanpa di sertai lendir dan darah. Diare akut yaitu diare yang berlangsung kurang dari 15 hari, sedangkan menurut World Gastroenterology Organisation global guidelenis 2005, diare akut di definisikan sebagai pasase tinja yang cair  atau lembek dengan jumlah lebih banyak dari normal, berlangsung kurang dari 14 hari.", "img_diare_akut"));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P10", "Penyakit Diare Kronis", "Bila pasien keadaan umum baik baik tidak dehidrasi, asupan cairan dengan minuman ringan, sari buah, sup dan keripik asin. Bila pasien kehilangan cairan yang banyak dan dehidrasi dapat memberikan cairan isotonik mengandung elektrolit dan gula atau starch harus diberikan", "Diare kronik adalah diare yang berlangsung lebih dari 15 hari. Sebenarnya para pakar di dunia telah mengajukan beberapa kriteria mengenai batasan kronik pada kasus diare tersebut, ada yang 15 hari, 3 minggu, 1 bulan dan 3 bulan, tetapi di indonesia dipilih waktu lebih 15 hari agar dokter tidak lengah, dapat lebih cepat menginvestigasi penyebab diare kronik dengan lebih cepat.","img_diare_kronik"));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P11", "Penyakit Striktur/Stenosis Esofagus", "Memberikan nutrisi yang bergizi tinggi dengan kalori, protein, lemak dan karbohidrat yang seimbang", "Striktur/stenosis esofagus penyakit yang jarang didapatkan, namun sangat menggangu kehidupan, striktur/stenosis esofagus adalah penyempitan lumen esofagus, dapat karena tumor atau penyebab lain . Striktur/stenosis merupakan penyempitan lumen karena fibrosis dinding esofagus yang disebabkan oleh macam-macam penyebab. Proses striktur terjadi akibat reaksi inflamasi dan nekrosis esofagus yang disebabkan oleh macam-macam penyebab.", "img_striktur"));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P12", "Penyakit Kolitis Infeksi", "Segera menghubungi dokter", "Kolitis infeksi adalah suatu peradangan akut atau kronik pada kolon, penyakit kolitis infeksi ini lebih di fokuskan kepada kolitis amebik yang sering ditemukan di indonesia sebagai daerah tropik. Manusia merupakan host sekaligus reservoir utama. Penularannya lewat kontaminasi tinja ke makanan dan minuman, dengan perantara lalat, kecoak, kontak interpersonal, atau lewat hubungan seksual anal-oral. Sanitasi lingkungan yang jelek, penduduk yang padat dan kurangnya sanitasi individual mempermudah penularannya.","img_kolitis_infeksi"));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P13", "Penyakit Inflammatory Bowel Disaese", "Segera menghubungi dokter", "Inflammatory bowl disease adalah penyakit inflamasi yang melibatkan saluran cerna.", "img_inflammatory_bowel_disease"));
-        SQLiteHelper.getInstance(this).addPenyakit(new Penyakit("P14", "Penyakit Pankreatis Kronik", "Perbikan keadaan umum, bila lemah dirawat, hentikan konsumsi alkohol, diet rendah lemak, diet kecil tapi sering, hndari makanan yang secara individu tidak dapat ditoleransi", "Pankreatis kronik terjadi karena defesiensi lithoastatin : Protein lithostatin disekresi oleh pancreas, berguna untuk mempertahankan kalsium dalam cairan pancreas sehingga tetap cair. Difesiensi lithostatin ini dibuktikan sebagai penyebab pembentukan presepitat protein.","img_pankreatis_kronik"));
-    */
+        SQLiteHelper
+                .getInstance(this)
+                .addPenyakit(new Penyakit(
+                        "H2",
+                        "Penyakit Cacar Babi",
+                        "Makanan diberi TM 10. Berikan penstrep, terramycin injeksi, ditambah vitamin A.",
+                        "Penyakit Cacar Babi merupakan penyakit menular pada babi, ditandai dengan " +
+                                "adanya Iepuh dan keropeng pada kulit. Cacar babi biasanya merupakan " +
+                                "penyakit ringan dengan lesi terbatas pada kulit. Anak babi terserang dengan tingkat mortalitas tinggi.",
+                        "imgicon",
+                        "Cacar babi disebabkan oleh Swinepoxvirus dari famili Poxviridae. Semua strain" +
+                                "memiliki imunogenik yang sama dan dapat dibedakan dengan virus pox lainnya." +
+                                "Genom virus tersusun atas DNA beruntai tunggal (ss-DNA) dengan berat molekul" +
+                                "80x10 6 D. Asam inti tersebut dilapisi protein (nukleoid) dan lapisan luar terdapat" +
+                                "membran serta di kedua sisi terdapat badan lateral bentuknya elips. Partikel virus" +
+                                "ini dibungkus oleh struktur membran (amplop). Bentuk virus seperti cakram atau" +
+                                "bundar dan berukuran 300 -350 nm x 200- 250 nm.",
+                        "Pengobatan spesifik terhadap cacar babi belum ada. Pengobatan" +
+                                "dengan yodium pekat dan antibiotika pada kulit dapat mencegah infeksi" +
+                                "sekunder.",
+                        "Pemeliharaan yang baik, serta kebersihan akan menolong keselamatan babi, terhindar" +
+                                "dari penyakit tersebut."
+                ));
+        SQLiteHelper
+                .getInstance(this)
+                .addPenyakit(new Penyakit(
+                        "H3",
+                        "Penyakit Colibasilosis",
+                        "Kandang diusahakan selalalu kering dan hangat, latai diberi alas dan sering diganti, " +
+                                "tidak sampai mejadi kotor ataupun basah aibat air kencing. Makanan diberi tambahan aureomycin",
+                        "Colibacillosis adalah penyakit pada hewan, terutama yang berumur muda yang" +
+                                "disebabkan oleh bakteri Escherichia coli (E.coli).",
+                        "imgicon",
+                        "E.coli penyebab colibacillosis adalah bakteri berbentuk batang berukuran" +
+                                "0,5x1,0-3,0 mikrometer, Gram negatif, motif dan tidak membentuk spora. Bakteri" +
+                                "ini tidak selalu berbentuk, melainkan dapat dijumpai dengan bentuk coccoid" +
+                                "bipolar hingga fi lamen. Kedudukan sel bakteri satu dengan yang lain lazimnya" +
+                                "sendiri-sendiri, tetapi dapat pula merupakan rantai pendek (short chains). Skema" +
+                                "antigenik genus didasarkan pada adanya bermacam tipe antigen yaitu O, H dan" +
+                                "K. Yang terakhir ini dibagi ke dalam antigen L, A dan B.",
+                        "Bermacam-macam antibiotik diketahui memberikan hasil baik terhadap" +
+                                "kejadian colibacillosis, diantaranya tetracycline, neomycin dan streptomycin." +
+                                "Kebiasaan memberikan antibiotik kepada anak ternak sering menimbulkan" +
+                                "resistensi. Pemberian antibiotik pada ternak potong dihentikan sekurang-" +
+                                "kurangnya 7 hari sebelum dipotong. Selain pemberian antibiotik atau" +
+                                "sulfonamide, obat-obatan penunjang lainnya, sebaiknya diberikan juga infus" +
+                                "dengan NaCl fi siologis.",
+                        "Hindari keadaan penuh sesak di kandang (over crowded), usahakan" +
+                                "ternak terbagi dalam kelompok kecil dan terdiri dari umur yang sama." +
+                                "Pengendalian colibacillosis pada anak ternak adalah dengan manajemen" +
+                                "kandang dan hygiene yang baik. Lantai kandang terbuat dari bahan yang" +
+                                "mudah dibersihkan. Disinfektan kandang dilakukan setiap ada pergantian" +
+                                "kelompok ternak. Tempat pakan dan air minum diletakkan sedemikian rupa" +
+                                "sehingga terhindar dari pencemaran feses."
+                ));
+        SQLiteHelper
+                .getInstance(this)
+                .addPenyakit(new Penyakit(
+                        "H4",
+                        "Penyakit Streptococosis",
+                        "",
+                        "Streptococcosis pada babi dalam hal ini dibatasi hanya pada penyakit yang disebabkan oleh Streptococcus sp. " +
+                                "yang ditandai dengan adanya poliartritis, septikemia dan meningitis. " +
+                                "Penyakit ini menimbulkan kerugian berupa kematian, baik pada anak babi maupun babi dewasa, " +
+                                "biaya pengobatan yang tinggi dan bersifat zoonotik. Pada manusia, " +
+                                "Streptococcus suis dapat menimbulkan septikemia, meningitis dan endokarditis.",
+                        "imgicon",
+                        "Penyebab streptococcosis pada babi adalah Streptococcus equi subspesies" +
+                                "zooepidemicus (Str.zooepidemicus) dan Streptoccocus suis (Str.suis) tipe 2." +
+                                "Str.zooepidemicus termasuk dalam grup Lancefi eld’s C, sedangkan Str.suis" +
+                                "termasuk dalam grup Lancefi eld’s D.",
+                        "Pengobatan yang paling efektif adalah dengan preparat penisilin." +
+                                "Disamping itu oxytetracyclin dan kanamycin juga cukup efektif untuk" +
+                                "pengobatan streptococcosis pada babi.",
+                        "pencegahan dapat dilakukan dengan menjaga kebersihan kandang, tempat pakan dan minuman. " +
+                                "Pemberian pakan berasal dari Iimbah hewan sakit harus dihindari."
+                ));
+        SQLiteHelper
+                .getInstance(this)
+                .addPenyakit(new Penyakit(
+                        "H5",
+                        "Penyakit Erysipelas",
+                        "",
+                        "Erysipelas adalah penyakit hewan menular yang disebabkan oleh bakterial dan terutama menyerang babi. " +
+                                "Bakteri Erysipelothrix rusiopathiae penyebab penyakit tersebut berkesan seperti berlian atau " +
+                                "Erysipelathrix insidiosa. Erysipelas pada babi biasanya menimbulkan " +
+                                "bercak-bercak merah pada kulit sehingga sering disebut “diamond skin disease”. ",
+                        "imgicon",
+                        "E.insidiosa berbentuk batang langsing, kecil, lurus, membentuk kurva atau" +
+                                "membentuk fi lamen, membentuk koloni halus (S), koloni kasar (R) dan koloni" +
+                                "antara halus dan kasar (RS) tergantung type dari erysipelas. Bakteri yang" +
+                                "berasal dari koloni halus berbentuk batang halus, panjang 0,5-2,5 micrometer" +
+                                "sedangkan yang berasal koloni kasar membentuk fi lamen, bercabang atau" +
+                                "membentuk lingkaran, dengan ukuran panjang antara 4,15 micrometer. Bakteri ini" +
+                                "tidak membentuk spora, tidak bergerak dan bersifat Gram positif, biasa terdapat" +
+                                "pada tonsil dan selaput lendir pada babi sehat dan hewan lain.",
+                        "Serum kebal, digunakan untuk tujuan profi laksis dan pengobatan." +
+                                "Diberikan 5 ml serum untuk hewan yang beratnya sama" +
+                                "dengan atau kurang dari 50 kg. Untuk tiap kenaikan berat" +
+                                "badan 10 kg di atas 50 kg diberikan tambahan 1 ml serum" +
+                                "Imunitas yang ditimbulkan tidak lebih dari 15 hari.",
+                        "Vaksin" +
+                                "Attenuated vaccine: atenuasi dilakukan pada kelinci. Kekebalan" +
+                                "yang ditimbulkan 8-12 bulan. Untuk ternak bibit dilakukan vaksinasi" +
+                                "ulang selang 1 tahun."
+                ));
+        SQLiteHelper
+                .getInstance(this)
+                .addPenyakit(new Penyakit(
+                        "H6",
+                        "Penyakit Koksidiosis",
+                        "",
+                        "Koksidioasi merupakan penyakit parasiter pada sistem penceranaan babi akibat infeksi protozoa genus Emira.",
+                        "imgicon",
+                        "Penyebab",
+                        "Pencegahan",
+                        "Pengobatan"
+                ));
+        SQLiteHelper
+                .getInstance(this)
+                .addPenyakit(new Penyakit(
+                        "H7",
+                        "Penyakit Ascariasis",
+                        "",
+                        "Ascariasis adalah penyakit parasit yang disebabkan oleh infeksi cacing nematoda" +
+                                "dari famili Ascaridae, genus Toxocara.",
+                        "imgicon",
+                        "Cacing Toxocara vitulorum atau disebut juga Ascaris vitulorum atau Neoascaris" +
+                                "vitulorum termasuk kelas nematoda yang memiliki kemampuan melintasi hati," +
+                                "paru-paru, dan plasenta. Cacing jantan berukuran panjang sekitar 15-26 cm" +
+                                "dengan lebar (pada bagian badan) sekitar 5 mm, sedangkan yang betina lebih" +
+                                "panjang, yaitu berukuran 22-30 cm dengan lebar sekitar 6 mm. Telur cacing ini" +
+                                "berwarna kuning, berdinding cukup tebal, dengan ukuran telur sekitar 75-95 x" +
+                                "60-75 µm.",
+                        "Obat berupa anthelmintika, misalnya :" +
+                                "a. pyrantel dengan dosis 250 mg per pedet tanpa memperhatikan berat badan\n"+
+                                "b. febantel dengan dosis 6 mg/kg berat badan,\n" +
+                                "c. levamisole dengan dosis 7,5 mg/kg berat badan,\n" +
+                                "d. piperazine citrate dengan dosis 200 mg/kg berat badan, secara oral,\n" +
+                                "e. Eprinomectin (Eprinex) dengan dosis 0.5 mg/kg terbukti efektif terhadap T. vitulorum.\n" +
+                                "Pengobatan pada induk penderita sangat sulit dilakukan, sebab L3" +
+                                "tersembunyi pada otot/organ tubuh. Pemberian anthelmintika yang bersifat" +
+                                "sistemik, seperti ivermectin direkomendasikan untuk membunuh larva yang tersembunyi tersebut.",
+                        "(1) Pada daerah endemis, peternak dapat memberikan anthelmintika" +
+                                "pada pedet yang berumur 10-16 hari untuk membunuh cacing yang" +
+                                "belum dewasa.\n" +
+                                "(2) Untuk tindakan pencegahan direkomendasikan untuk melakukan" +
+                                "pengobatan secara teratur pada pedet dan menjaga kebersihan" +
+                                "kandang."
+                ));
+        SQLiteHelper
+                .getInstance(this)
+                .addPenyakit(new Penyakit(
+                        "H8",
+                        "Penyakit Salmonellosis",
+                        "",
+                        "Salmonellosis adalah penyakit menular yang dapat menyerang hewan maupun manusia. " +
+                                "Bakteri penyebab penyakit dapat menimbulkan berbagai macam manifestasi " +
+                                "penyakit pada hewan dan demam enterik serta gastroenteritis pada manusia.",
+                        "imgicon",
+                        "Salmonellosis disebabkan oleh Bakteri Salmonella, ada lebih dari 1800 serotipe" +
+                                "Salmonella ditemukan pada hewan dan manusia, termasuk hewan liar, reptilia," +
+                                "burung liar dan insekta. Beberapa serotipe tidak mempunyai inang yang spesifik" +
+                                "dan gejala yang ditimbulkan tidak khas misalnya Salmonella typhimurium.",
+                        " a. Sulfonamida: sulfanilamid terhadap infeksi dengan S.typhi, S.paratyphi" +
+                                "dan S.gallinarum, dan lain-lain; sulfaquinoxalin dan sulfamerasin untuk" +
+                                "infeksi S.pullorum dan S.gallinarum, sulfagunanidin untuk infeksi" +
+                                "S.cholerasuis.\n" +
+                                "b. Nitrofurans: nitrofurazone untuk infeksi S.cholerasuis, untuk infeksi" +
+                                "S.pullorum dan S.gallinarum.\n" +
+                                "c. Antibiotika: streptomycin, neomycin, aureomycin dan terramicyn untuk" +
+                                "infeksi bakteri Salmonella pada umumnya.",
+                        "Pencegahan salmonellosis dapat dilakukan dengan:\n" +
+                                "a. Vaksinasi dengan menggunakan vaksin aktif\n" +
+                                "b. Tindakan sanitasi terhadap kandang, peralatan, dan lingkungan" +
+                                "peternakan, serta fumigasi penetasan telur ayam.\n" +
+                                "c. Pencegahan terhadap pemasukan hewan terinfeksi atau carrier."
+                ));
     }
 
     private void queryGejala(){
-        /*
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("tinja","G1","Tinja Berlendir"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("tinja","G2","Tinja berbau busuk"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("tinja","G3","Tinja bercampur darah"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("tinja","G4","Tinja cair pada saat nyeri"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("tinja","G5","Tinja berjumlah kecil tapi sering"));
-
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("berat badan", "G6","Berat badan Menurun"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("berat badan", "G7","Berat badan menrun > 10%"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("berat badan", "G8","Berat badan kurang dari 18,5 kg"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("berat badan", "G9","Berat badan turun > 10% dalam 3 bulan"));
-
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("buang air besar", "G10","Buang air besar Sakit dan Sulit"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("buang air besar", "G11","Nyeri berkurang setelah buang air besar"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("buang air besar", "G12", "Perasaan tidak puas saat buang air besar"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("buang air besar", "G13", "Frekuensi buang air besar bertambah saat nyeri"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("buang air besar", "G14", "Buang air besar lebih dari tiga kali sehari dengan konsistensi cair"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("buang air besar", "G15", "Buang air besar lebih dari tiga kali sehari  dengan konsistensi cair selama 15 hari"));
-
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("dada", "G16", "Rasa nyeri atau terbakar di dada"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("dada", "G17", "Ada yang mengganjal di dada sewaktu makan"));
-
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("dubur", "G18", "Dubur terasa panas"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("dubur", "G19", "Ada benjolan di dubur"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("dubur", "G20", "Dubur terasa gatal"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("dubur", "G21", "Pendarahan melalui dubur dan berwarna merah muda"));
-
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("muntah", "G22", "Muntah"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("muntah", "G23", "Rasa tidak nyaman disertai mudah"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("muntah", "G24", "Muntah yang persisten"));
-
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("mual", "G25", "Mual"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("mual", "G26", "Mual sehabis makan"));
-
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("ulu hati", "G27", "Ulu hati tidak nyaman"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("ulu hati", "G28", "Ulu hati nyeri panas dan pedih"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("ulu hati", "G29", "Ulu hati rasa sakit seperti terbakar"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("ulu hati", "G30", "Ulu hati terasa penuh setelah makan"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("ulu hati", "G31", "Nyeri dominan di ulu hati disertai nyeri Pada malam hari"));
-
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("perut", "G32", "Perut kram"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("perut", "G33", "Perut kembung"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("perut", "G34", "Perut nyeri ringan"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("perut", "G35", "Rasa sakit setelah makan sebelah kiri garis tengah perut"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("perut", "G36", "Nyeri atau sakit perut epigastirum yang berlokasi di abdomen tengah dan kiri atas"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("perut", "G37", "Nyeri perut yang dirasakan berpindah-pindah"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("perut", "G38", "Rasa nyeri perut yang dirasakan tidak menentu"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("perut", "G39", "Waktu nyeri perut yang dirasakan sebentar"));
-
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("riwayat", "G40", "Riwayat keluarga terkena IBD"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("riwayat", "G41", "Riwayat pemakaian antibiotik yang lama"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("riwayat", "G42", "Riwayat TD"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("riwayat", "G43", "Adanya riwayat makanan siap santap"));
-
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("nyeri", "G44", "Nyeri epigestrik"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("nyeri", "G45", "Rasa nyeri, rasa tidak enak, atau rasa terbakar di epigestrum"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("nyeri", "G46", "Nyeri di daerah umbilikus"));
-
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G67", "Stress"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G68", "Suhu badan meningkat"));
-        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G69", "Umur > 45-50 keluhan muncul untuk pertama kali"));
-
-        */
         SQLiteHelper.getInstance(this).addGejala(new Gejala("", "E1", "Nafsu Makan Berkurang"));
         SQLiteHelper.getInstance(this).addGejala(new Gejala("", "E2", "Lemas"));
         SQLiteHelper.getInstance(this).addGejala(new Gejala("", "E3", "Demam"));
@@ -252,27 +322,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         SQLiteHelper.getInstance(this).addGejala(new Gejala("", "E18", "Pertumbuhan Terhambat"));
         SQLiteHelper.getInstance(this).addGejala(new Gejala("", "E19", "Diare Berdarah terus menerus"));
         SQLiteHelper.getInstance(this).addGejala(new Gejala("", "E20", "Batuk"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G47", "Nafsu Makan Berkurang"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G48", "Lemas"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G49", "Demam"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G50", "Muntah"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G51", "Diare Kunign"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G52", "Kemerahan Pada Kulit"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G53", "Pendarahan di Bagian Permukaan Kulit"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G54", "Kejang"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G55", "Gatal-Gatal"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G56", "Muncul Bintik Merah"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G57", "Ada Nanah di Kulit"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G58", "Diare Putih"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G59", "Bulu Berdiri"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G60", "Bengkak di Persendian"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G61", "Sulit Berjalan"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G62", "Gemetar"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G63", "Bulu Kusam"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G64", "Pertumbuhan Terhambat"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G65", "Diare Berdarah terus menerus"));
-//        SQLiteHelper.getInstance(this).addGejala(new Gejala("", "G66", "Batuk"));
-
     }
 
     private void queryKeputusan(){
@@ -284,14 +333,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H6","E1,E2,E17,E18,E19","0.4"));
         SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H7","E5,E13,E18","0.35"));
         SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H8","E1,E2,E3,E5,E20","0.3"));
-        /*
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P9","G1,G3,G14,G22,G25,G33,G41,G43,G46,G51,",""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P10","G3,G5,G6,G15,G22,G51,G64,G66",""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P11","G16,G17,G26,G27,G33,G61",""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P12","G1,G2,G3,G25,G32,G33,G34,G48,G49,G51",""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P13","G3,G5,G6,G15,G22,G34,G40,G51,G64,G66",""));
-        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("P14","G1,G3,G6,G14,G22,G25,G33,G36,G41,G43,G46,G51",""));
-    */
     }
 }
 

@@ -10,7 +10,7 @@
         android:layout_weight="2"
         android:id="@+id/imgPenyakit"
         android:layout_height="@dimen/_35sdp"
-        android:src="@drawable/ic_penyakit"
+        android:src="@drawable/diagnostic"
         android:padding="@dimen/_5sdp"
         android:background="#fff"/>
     <TextView

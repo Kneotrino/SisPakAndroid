@@ -15,8 +15,8 @@ public class DetailDataActivity extends AppCompatActivity {
     private TextView txtPenanganan
             ,txtDesc
             ,txtDesc1
-            ,txtDesc2
-            ,txtDesc3
+           ,txtDesc2
+         ,txtDesc3
             ;
     private ImageView imgPenyakit;
     private Toolbar toolbar;

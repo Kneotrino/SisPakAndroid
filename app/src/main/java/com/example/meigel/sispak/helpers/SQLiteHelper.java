@@ -22,34 +22,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "databaseKu";
 
-    //TABLE HOSPITAL
-    //private static final String TABLE_HOSPITAL = "hospitals";
     private static final String TABLE_PENYAKIT = "penyakits";
-    //private static final String TABLE_ARTIKEL = "artikel";
     private static final String TABLE_GEJALA = "gejala";
     private static final String TABLE_KEPUTUSAN = "keputusan";
 
     //KOLOM
     private static final String KEY_PENYAKIT_ID = "penyakid_id";
     private static final String KEY_GEJALA_ID = "gejala_id";
-    //private static final String KEY_HOSPITAL_ID = "hospital_id";
-    //private static final String KEY_ARTIKEL_ID = "artikel_id";
     private static final String KEY_KEPUTUSAN_ID = "keputusan_id";
     private static final String KEY_NAME = "name";
-    //private static final String KEY_ADDRESS = "alamat";
-    //private static final String KEY_TELP = "telp";
-    //private static final String KEY_JADWAL = "jadwal";
-    //private static final String KEY_LAT = "lat";
-    //private static final String KEY_LNG = "lng";
-    //private static final String KEY_KEC = "kec";
     private static final String KEY_PENANGANAN = "penanganan";
     private static final String KEY_DESC = "desc";
     private static final String KEY_DESC1 = "desc1";
     private static final String KEY_DESC2 = "desc2";
     private static final String KEY_DESC3 = "desc3";
     private static final String KEY_KODE = "code";
-    //private static final String KEY_TITLE = "title";
-    //private static final String KEY_CATEGORY = "category";
     private static final String KEY_IMG = "img";
     private static final String KEY_PARAM = "param";
     private static final String KEY_GEJALA = "gejala";
@@ -70,17 +57,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        /*
-        String CREATE_HOSPITAL_TBL = "CREATE TABLE " + TABLE_HOSPITAL + "("
-                + KEY_HOSPITAL_ID + " INTEGER PRIMARY KEY,"
-                + KEY_NAME + " TEXT,"
-                + KEY_KEC + " TEXT,"
-                + KEY_ADDRESS + " TEXT,"
-                + KEY_TELP + " TEXT,"
-                + KEY_JADWAL + " TEXT,"
-                + KEY_LAT + " TEXT,"
-                + KEY_LNG + " TEXT" + ")";
-*/
         String CREATE_PENYAKIT_TBL = "CREATE TABLE " + TABLE_PENYAKIT + "("
                 + KEY_PENYAKIT_ID + " INTEGER PRIMARY KEY,"
                 + KEY_KODE + " TEXT,"
@@ -89,16 +65,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 + KEY_DESC + " TEXT,"
                 + KEY_DESC1 + " TEXT,"
                 + KEY_DESC2 + " TEXT,"
-                + KEY_DESC3 + " TEXT,"
+               + KEY_DESC3 + " TEXT,"
                 + KEY_IMG + " TEXT" + ")";
-/*
-        String CREATE_ARTIKEL_TBL = "CREATE TABLE " + TABLE_ARTIKEL + "("
-                + KEY_ARTIKEL_ID + " INTEGER PRIMARY KEY,"
-                + KEY_TITLE + " TEXT,"
-                + KEY_CATEGORY + " TEXT,"
-                + KEY_DESC + " TEXT,"
-                + KEY_IMG + " TEXT" + ")";
-*/
+
         String CREATE_GEJALA_TBL = "CREATE TABLE " + TABLE_GEJALA + "("
                 + KEY_GEJALA_ID + " INTEGER PRIMARY KEY,"
                 + KEY_KODE + " TEXT,"
@@ -111,17 +80,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 + KEY_GEJALA + " TEXT,"
                 + KEY_PROBALITAS + " TEXT" + ")";
 
-        //db.execSQL(CREATE_HOSPITAL_TBL);
         db.execSQL(CREATE_PENYAKIT_TBL);
-        //db.execSQL(CREATE_ARTIKEL_TBL);
         db.execSQL(CREATE_GEJALA_TBL);
         db.execSQL(CREATE_KEPUTUSAN_TBL);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_ARTIKEL);
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_HOSPITAL);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PENYAKIT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_GEJALA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_KEPUTUSAN);
@@ -134,195 +99,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("delete from " + TABLE_PENYAKIT);
 //        onCreate(db);
     }
-/*
-    //CRUD HOSPITAL
-    public void addHospital(Hospital hospital){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, hospital.getName());
-        values.put(KEY_ADDRESS, hospital.getAlamat());
-        values.put(KEY_KEC, hospital.getKec());
-        values.put(KEY_LAT, hospital.getLat());
-        values.put(KEY_LNG, hospital.getLng());
-        values.put(KEY_JADWAL, hospital.getJadwal());
-        values.put(KEY_TELP, hospital.getTelp());
-
-        db.insert(TABLE_HOSPITAL, null, values);
-        db.close();
-    }
-
-    public Hospital getHospital(int id){
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_HOSPITAL, new String[] { KEY_HOSPITAL_ID, KEY_KEC, KEY_NAME, KEY_ADDRESS, KEY_TELP, KEY_JADWAL, KEY_LAT, KEY_LNG}, KEY_HOSPITAL_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
-        if(cursor != null)
-            cursor.moveToFirst();
-        Hospital hospital = new Hospital(
-                cursor.getInt(0),
-                cursor.getString(1),
-                cursor.getString(2),
-                cursor.getString(3),
-                cursor.getString(4),
-                cursor.getString(5),
-                cursor.getString(6),
-                cursor.getString(7)
-        );
-
-        return hospital;
-    }
-
-    public List<Hospital> getHospitals(){
-        List<Hospital> hospitals = new ArrayList<Hospital>();
-
-        String selectQuery = "SELECT * FROM " + TABLE_HOSPITAL;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if(cursor.moveToFirst()){
-            do {
-                Hospital hospital = new Hospital(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4),
-                        cursor.getString(5),
-                        cursor.getString(6),
-                        cursor.getString(7)
-                );
-                hospitals.add(hospital);
-            } while (cursor.moveToNext());
-        }
-
-        return hospitals;
-    }
-
-    public List<Hospital> getHospitals(String kec){
-        List<Hospital> hospitals = new ArrayList<Hospital>();
-
-        String selectQuery = "SELECT * FROM " + TABLE_HOSPITAL + " WHERE " + KEY_KEC + " LIKE '%" + kec + "%'";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if(cursor.moveToFirst()){
-            do {
-                Hospital hospital = new Hospital(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4),
-                        cursor.getString(5),
-                        cursor.getString(6),
-                        cursor.getString(7)
-                );
-                hospitals.add(hospital);
-            } while (cursor.moveToNext());
-        }
-
-        return hospitals;
-    }
-
-    public int updateHospital(Hospital hospital){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, hospital.getName());
-        values.put(KEY_ADDRESS, hospital.getAlamat());
-        values.put(KEY_LAT, hospital.getLat());
-        values.put(KEY_LNG, hospital.getLng());
-        values.put(KEY_JADWAL, hospital.getJadwal());
-        values.put(KEY_TELP, hospital.getTelp());
-
-        return db.update(TABLE_HOSPITAL, values, KEY_HOSPITAL_ID + " = ?", new String[] { String.valueOf(hospital.getId())});
-    }
-
-    public void deleteHospital(Hospital hospital){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_HOSPITAL, KEY_HOSPITAL_ID + " = ?",
-                new String[] { String.valueOf(hospital.getId()) });
-        db.close();
-    }
-
-    //CRUD ARTIKEL
-    public void addArtikel(Artikel artikel){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_TITLE, artikel.getTitle());
-        values.put(KEY_DESC, artikel.getDesc());
-        values.put(KEY_CATEGORY, artikel.getCategory());
-        values.put(KEY_IMG, artikel.getImg());
-
-        db.insert(TABLE_ARTIKEL, null, values);
-        db.close();
-    }
-
-    public Artikel getArtikel(int id){
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_ARTIKEL, new String[] { KEY_ARTIKEL_ID, KEY_TITLE, KEY_DESC, KEY_CATEGORY, KEY_IMG}, KEY_ARTIKEL_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
-        if(cursor != null)
-            cursor.moveToFirst();
-        Artikel artikel = new Artikel(
-                cursor.getInt(0),
-                cursor.getString(1),
-                cursor.getString(2),
-                cursor.getString(3),
-                cursor.getString(4)
-        );
-
-        return artikel;
-    }
-
-    public List<Artikel> getArtikels(){
-        List<Artikel> artikels = new ArrayList<Artikel>();
-
-        String selectQuery = "SELECT * FROM " + TABLE_ARTIKEL;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if(cursor.moveToFirst()){
-            do {
-                Artikel artikel = new Artikel(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4)
-                );
-                artikels.add(artikel);
-            } while (cursor.moveToNext());
-        }
-
-        return artikels;
-    }
-
-    public int updateArtikel(Artikel artikel){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_CATEGORY, artikel.getCategory());
-        values.put(KEY_TITLE, artikel.getTitle());
-        values.put(KEY_DESC, artikel.getDesc());
-        values.put(KEY_IMG, artikel.getImg());
-
-        return db.update(TABLE_ARTIKEL, values, KEY_ARTIKEL_ID + " = ?", new String[] { String.valueOf(artikel.getId())});
-    }
-
-    public void deleteArtikel(Artikel artikel){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_ARTIKEL, KEY_ARTIKEL_ID + " = ?",
-                new String[] { String.valueOf(artikel.getId()) });
-        db.close();
-    }
-*/
     //CRUD PENYAKIT
     public void addPenyakit(Penyakit penyakit){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -365,9 +141,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 cursor.getString(3),
                 cursor.getString(4),
                 cursor.getString(5),
-                cursor.getString(6),
-                cursor.getString(7),
-                cursor.getString(8)
+               cursor.getString(6),
+               cursor.getString(7),
+               cursor.getString(8)
+
         );
 
         return penyakit;
@@ -402,18 +179,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     public int updatePenyakit(Penyakit penyakit){
-        /*
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, penyakit.getName());
-        values.put(KEY_KODE, penyakit.getKode());
-        values.put(KEY_PENANGANAN, penyakit.getPenanganan());
-        values.put(KEY_DESC, penyakit.getDesc());
-        values.put(KEY_IMG, penyakit.getImg());
-
-        return db.update(TABLE_ARTIKEL, values, KEY_PENYAKIT_ID + " = ?", new String[] { String.valueOf(penyakit.getId())});
-        */
         return 0;
     }
 

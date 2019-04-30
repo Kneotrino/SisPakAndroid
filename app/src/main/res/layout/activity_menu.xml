@@ -26,9 +26,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:background="@color/pink"
+                android:background="@color/white1"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/ic_konsultasi" />
+                android:src="@drawable/doctor" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,78 +43,86 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_weight="1">
+
         <LinearLayout
+            android:id="@+id/btnPenyakit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/btnPenyakit">
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:background="@color/pink"
+                android:background="@color/white1"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/ic_penyakit" />
+                android:src="@drawable/diagnostic" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_margin="5dp"
-                android:text="Info Penyakit"/>
+                android:gravity="center"
+                android:text="Info Penyakit" />
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/btnBantuan"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/btnArtikel">
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:background="@color/pink"
+                android:background="@color/white1"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/ic_berita" />
+                android:src="@drawable/user" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_margin="5dp"
-                android:text="Bantuan"/>
+                android:gravity="center"
+                android:text="Tentang Aplikasi" />
         </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
+
         <LinearLayout
+            android:id="@+id/btnArtikel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/btnBantuan">
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:background="@color/pink"
+                android:background="@color/white1"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/ic_info" />
+                android:src="@drawable/information" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_margin="5dp"
-                android:text="Tentang Aplikasi"/>
+                android:gravity="center"
+                android:text="Admin Mode" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -127,9 +135,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:background="@color/pink"
+                android:background="@color/white1"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/ic_feedback" />
+                android:src="@drawable/logout" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -137,6 +145,8 @@
                 android:layout_margin="5dp"
                 android:text="Keluar"/>
         </LinearLayout>
+
     </LinearLayout>
+
 
 </LinearLayout>

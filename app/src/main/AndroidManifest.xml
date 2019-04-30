@@ -36,7 +36,7 @@
             android:name=".views.activities.DetailDataActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".views.activities.FeedbackActivity"
+            android:name=".views.activities.ExitActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.activities.BantuanActivity"
@@ -44,7 +44,6 @@
         <activity
             android:name=".views.activities.ResultDiagnoseActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".views.activities.KategoriRumahSakit" />
         <activity android:name=".views.activities.TentangActivity"></activity>
     </application>
 

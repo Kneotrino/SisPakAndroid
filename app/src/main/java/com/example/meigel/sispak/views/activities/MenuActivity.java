@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.meigel.sispak.R;
 import com.squareup.okhttp.Call;
@@ -30,6 +32,8 @@ import java.io.InputStreamReader;
 public class MenuActivity extends AppCompatActivity {
     private LinearLayout btnDiagnosa, btnPenyakit, btnArtikel, btnBantuan, btnKeluar;
     private Toolbar toolbar;
+    private Button btnBack;
+
 
     private static int versionCode;
     private static String versionName;
@@ -61,7 +65,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
     public void cekUpdate(String json) {
-        versionCode = 3;
+        versionCode = 4;
         System.out.println("versionCode = " + versionCode);
         try {
             JSONObject reader = new JSONObject(json);
@@ -76,7 +80,7 @@ public class MenuActivity extends AppCompatActivity {
                 System.out.println("pathDownload = " + pathDownload);
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
                 builder.setTitle("Update terbaru tersedia");
-                builder.setMessage("Apakah anda ingin perbarukan?");
+                builder.setMessage("Apakah anda ingin memperbarui aplikasi?");
                 builder.setPositiveButton("Iya", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pathDownload));
@@ -191,7 +195,8 @@ class Handler {
     }
 
     String result;
-    void doGetRequest(String url) throws IOException{
+
+    void doGetRequest(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -199,12 +204,13 @@ class Handler {
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(Request request, IOException e) {
-                        Log.d("Fail",e.getMessage());
+                        Log.d("Fail", e.getMessage());
                         result = "{" +
-                                "\"path\":\"https://drive.google.com/open?id=1hsJzum9wwi08Tg3UFazH0YGbUMsMjDll\"," +
+                                "\"path\":\"https://drive.google.com/drive/folders/1vcUtYW8YQ1uus_ZF9fsA_md6tAd8VTkA\"," +
                                 "\"versionCode\":1," +
                                 "\"versionName\":\"Dasar\"}";
                     }
+
                     @Override
                     public void onResponse(Response response) throws IOException {
                         setResult(response.body().string());

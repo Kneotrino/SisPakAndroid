@@ -22,6 +22,7 @@
             android:hint="Cari gejala ..."
             android:singleLine="true"
             android:padding="@dimen/_8sdp"
+            android:background="@color/white"
             android:id="@+id/txtSearch"/>
     </LinearLayout>
 
