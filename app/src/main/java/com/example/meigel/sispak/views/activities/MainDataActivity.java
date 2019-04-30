@@ -1,5 +1,6 @@
 package com.example.meigel.sispak.views.activities;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.meigel.sispak.R;
+import com.example.meigel.sispak.helpers.SQLiteHelper;
+import com.example.meigel.sispak.models.Penyakit;
 import com.example.meigel.sispak.views.fragments.PenyakitFragment;
 
 import java.lang.reflect.Field;
@@ -60,13 +63,11 @@ public class MainDataActivity extends AppCompatActivity {
     private void setupView(){
         btnAddPenyakit = (Button) findViewById(R.id.btnAddPenyakit);
 
-        Bundle bundle = new Bundle();
-        String myMessage = "Stackoverflow is cool!";
-        bundle.putString("message", myMessage );
+        final Bundle bundle = new Bundle();
         bundle.putBoolean("admin", AdminMode);
 
 
-        FragmentManager fm = getSupportFragmentManager();
+        final FragmentManager fm = getSupportFragmentManager();
 
         System.out.println("tipe = " + tipe);
         PenyakitFragment penyakitFragment = new PenyakitFragment();
@@ -75,20 +76,6 @@ public class MainDataActivity extends AppCompatActivity {
         fm.beginTransaction()
                 .add(R.id.content,penyakitFragment,"content_fragment")
                 .commitAllowingStateLoss();
-
-
-//        if(tipe.equalsIgnoreCase("penyakit")){
-//            getSupportActionBar().setTitle("Daftar Penyakit");
-//            if(fm.beginTransaction().isEmpty()){
-//                fm.beginTransaction()
-//                        .add(new PenyakitFragment(),"content_fragment")
-//                        .commitAllowingStateLoss();
-//            } else {
-//                fm.beginTransaction()
-//                        .replace(R.id.content, new PenyakitFragment(), "content_fragment")
-//                        .commitAllowingStateLoss();
-//            }
-//        }
 
         if (AdminMode)
         {
@@ -99,5 +86,43 @@ public class MainDataActivity extends AppCompatActivity {
             btnAddPenyakit.setVisibility(View.INVISIBLE);
             toolbar.setTitle("Daftar Penyakit");
         }
+
+        btnAddPenyakit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SQLiteHelper
+                        .getInstance(MainDataActivity.this)
+                        .addPenyakit(
+                                new Penyakit(
+                                        "H9",
+                                        "Penyakit H10",
+                                        "Vaksinasi dengan serum anti cholera babi atau rovac hog cholera.Sesudah babi umur 6" +
+                                                "minggu, diulangi setahun sekali.Babi-babi dara atau induk sebaiknya 3 minggu sebelum" +
+                                                "dikawinkan, sedang pejantan bisa sewaktu-waktu",
+                                        "Hog cholera (HC) merupakan penyakit viral menular terpenting pada babi," +
+                                                "berlangsung subakut, akut atau kronik, dengan proses penyakit yang tidak" +
+                                                "menciri atau bahkan kadang tidak tampak sama sekali.",
+                                        "pig",
+                                        "Penyebab hog cholera adalah virus single stranded Ribonucleic Acid (ss-" +
+                                                "RNA) dari genus Pestivirus termasuk famili Flaviviridae. Virus HC berada dalam" +
+                                                "genus yang sama dengan virus bovine viral diarrhea (BVD). Virus berbentuk bulat" +
+                                                "helikal atau tidak teratur dan berukuran antara 40-50 nm dengan nukleokapsid" +
+                                                "berukuran 29 nm.",
+                                        "Belum ada obat yang efektif untuk mencegah hog cholera.",
+                                        "Tindakan yang paling efektif untuk mencegah atau mengendalikan" +
+                                                "penyakit adalah melakukan vaksinasi dengan menggunakan vaksin"+
+                                                "aktif yang sudah diatenuasi. Keberhasilan program vaksinasi sangat" +
+                                                "tergantung dari strain, dosis dan aplikasi vaksin serta status kesehatan" +
+                                                "hewan yang divaksinasi. Pengendalian dapat dilakukan dengan melalui" +
+                                                "tindakan karantina."
+                                ));
+
+                PenyakitFragment penyakitFragment = new PenyakitFragment();
+                penyakitFragment.setArguments(bundle);
+                fm.beginTransaction()
+                        .replace(R.id.content,penyakitFragment,"content_fragment")
+                        .commitAllowingStateLoss();
+            }
+        });
     }
 }
