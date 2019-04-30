@@ -8,9 +8,12 @@ import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class MenuActivity extends AppCompatActivity {
     private LinearLayout btnDiagnosa, btnPenyakit, btnArtikel, btnBantuan, btnKeluar;
@@ -35,6 +39,7 @@ public class MenuActivity extends AppCompatActivity {
     private Button btnBack;
 
 
+    private static boolean AdminMode = false;
     private static int versionCode;
     private static String versionName;
     private static String pathDownload;
@@ -52,7 +57,6 @@ public class MenuActivity extends AppCompatActivity {
         btnKeluar = (LinearLayout) findViewById(R.id.btnKeluar);
         setupToolbar();
         setupView();
-
         setUpDate();
     }
 
@@ -133,6 +137,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MenuActivity.this, MainDataActivity.class);
                 i.putExtra("tipe", "penyakit");
+                i.putExtra("admin", AdminMode);
                 startActivity(i);
             }
         });
@@ -140,8 +145,54 @@ public class MenuActivity extends AppCompatActivity {
         btnArtikel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MenuActivity.this, BantuanActivity.class);
-                startActivity(i);
+                LayoutInflater li = LayoutInflater.from(MenuActivity.this);
+                View prompt = li.inflate(R.layout.frament_login, null);
+
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MenuActivity.this);
+                alertDialogBuilder.setTitle("Admin Mode");
+                alertDialogBuilder.setMessage("Masukan Username dan Password");
+                alertDialogBuilder.setView(prompt);
+
+                Button btnLogin = (Button) prompt.findViewById(R.id.btnLogin);
+                Button btnCancel = (Button) prompt.findViewById(R.id.btnCancel);
+
+                final EditText txtPassword = (EditText) prompt.findViewById(R.id.txtPassword);
+                final EditText txtUsername = (EditText) prompt.findViewById(R.id.txtUsername);
+
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+                btnLogin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String pass = txtPassword.getText().toString();
+                        String user = txtUsername.getText().toString();
+                        boolean login = Login(user, pass);
+
+                        if (login)
+                        {
+                            Toast.makeText(MenuActivity.this,"Login Berhasil", Toast.LENGTH_LONG).show();
+                            AdminMode = true;
+                            alertDialog.dismiss();
+                            toolbar.setTitle("SiPaBi Admin Mode");
+                        }
+                        else
+                        {
+                            Toast.makeText(MenuActivity.this,"Login Gagal", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+
+//                Intent i = new Intent(MenuActivity.this, BantuanActivity.class);
+//                startActivity(i);
             }
         });
 
@@ -174,6 +225,15 @@ public class MenuActivity extends AppCompatActivity {
                 alert.show();
             }
         });
+    }
+
+    private boolean Login(String user, String pass) {
+        ArrayList<String> dataUser = new ArrayList<String>();
+        dataUser.add("admin:admin");
+        String key = user + ":" + pass;
+        for(String s : dataUser)
+            if(s.trim().contains(key)) return true;
+        return false;
     }
 
 

@@ -7,11 +7,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.meigel.sispak.views.activities.MainDataActivity">
-        <include
+
+    <include
             layout="@layout/toolbar"/>
-        <FrameLayout
+
+    <Button
+        android:id="@+id/btnAddPenyakit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tambah Penyakit Baru" />
+
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/content"/>
 
-    </LinearLayout>
+</LinearLayout>

@@ -20,6 +20,7 @@ import java.util.List;
 public class PenyakitFragment extends Fragment {
     private ListView listPenyakit;
     private PenyakitItemAdapter pia;
+    private static boolean AdminMode = false;
 
     public PenyakitFragment() {
         // Required empty public constructor
@@ -33,6 +34,7 @@ public class PenyakitFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_penyakit, container, false);
         listPenyakit = (ListView)view.findViewById(R.id.listPenyakit);
         setupList();
+        AdminMode = this.getArguments().getBoolean("admin",false);
         return view;
     }
 
@@ -45,6 +47,7 @@ public class PenyakitFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getActivity(), DetailDataActivity.class);
                 i.putExtra("id",penyakits.get(position).getKode());
+                i.putExtra("admin",AdminMode);
                 startActivity(i);
             }
         });
