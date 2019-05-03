@@ -4,11 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.meigel.sispak.R;
-import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -32,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import io.github.skyhacker2.sqliteonweb.SQLiteOnWeb;
 
 public class MenuActivity extends AppCompatActivity {
     private LinearLayout btnDiagnosa, btnPenyakit, btnArtikel, btnBantuan, btnKeluar;
@@ -71,6 +70,10 @@ public class MenuActivity extends AppCompatActivity {
     public void cekUpdate(String json) {
         versionCode = 4;
         System.out.println("versionCode = " + versionCode);
+
+        SQLiteOnWeb.init(this).start();
+
+
         try {
             JSONObject reader = new JSONObject(json);
             String versionCodeString = reader.getString("versionCode");

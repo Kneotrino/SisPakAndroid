@@ -101,6 +101,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
     //CRUD PENYAKIT
     public void addPenyakit(Penyakit penyakit){
+        System.out.println("penyakit = " + penyakit);
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -123,8 +124,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_PENYAKIT,
                 new String[] {
                         KEY_PENYAKIT_ID,
-                        KEY_NAME,
                         KEY_KODE,
+                        KEY_NAME,
                         KEY_PENANGANAN,
                         KEY_DESC,
                         KEY_DESC1,
@@ -141,9 +142,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 cursor.getString(3),
                 cursor.getString(4),
                 cursor.getString(5),
-               cursor.getString(6),
-               cursor.getString(7),
-               cursor.getString(8)
+                cursor.getString(6),
+                cursor.getString(7),
+                cursor.getString(8)
 
         );
 
@@ -179,12 +180,27 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     public int updatePenyakit(Penyakit penyakit){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, penyakit.getName());
+        values.put(KEY_KODE, penyakit.getKode());
+        values.put(KEY_PENANGANAN, penyakit.getPenanganan());
+        values.put(KEY_DESC, penyakit.getDesc());
+        values.put(KEY_DESC1, penyakit.getDesc1());
+        values.put(KEY_DESC2, penyakit.getDesc2());
+        values.put(KEY_DESC3, penyakit.getDesc3());
+        values.put(KEY_IMG, penyakit.getImg());
+
+        db.update(TABLE_PENYAKIT, values, KEY_PENYAKIT_ID + " = " + penyakit.getId(), null);
+
         return 0;
     }
 
 
-    public void deletePenyakit(Penyakit penyakit){
-
+    public int deletePenyakit(Penyakit penyakit){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return  db.delete(TABLE_PENYAKIT,KEY_PENYAKIT_ID + " = " + penyakit.getId(), null);
     }
 
     //GEJALA

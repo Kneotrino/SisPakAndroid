@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/_15sdp"
+                android:text="Kode Penyakit"
+                android:textColor="#000"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/PenyakitKode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Kode Penyakit"
+                android:inputType="textShortMessage" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/_15sdp"
+                android:text="Nama Penyakit"
+                android:textColor="#000"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/PenyakitNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Nama Penyakit"
+                android:inputType="textShortMessage" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/_15sdp"
+                android:text="Pengobatan"
+                android:textColor="#000"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/PenyakitPengobatan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Pengobatan"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/_15sdp"
+                android:text="Penanganan"
+                android:textColor="#000"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/PenyakitPenanganan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Penanganan"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/_15sdp"
+                android:text="Pencegahan"
+                android:textColor="#000"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/PenyakitPencegahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Pencegahan"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/_15sdp"
+                android:text="Keterangan"
+                android:textColor="#000"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/PenyakitKeterangan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Keterangan"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/_15sdp"
+                android:text="Penyebab"
+                android:textColor="#000"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/PenyakitPenyebab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Penyebab"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:id="@+id/btnSimpanPenyakit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Simpan" />
+
+            <Button
+                android:id="@+id/btnBatal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Batal" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

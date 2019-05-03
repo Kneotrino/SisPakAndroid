@@ -128,4 +128,18 @@ public class Penyakit {
     public void setImg(String img) {
         this.img = img;
     }
+
+    public void  print(){
+        System.out.println("id = " + id);
+        System.out.println("kode = " + kode);
+        System.out.println("name = " + name);
+        System.out.println("penanganan = " + penanganan);
+        System.out.println("desc = " + desc);
+        System.out.println("desc1 = " + desc1);
+        System.out.println("desc2 = " + desc2);
+        System.out.println("desc3 = " + desc3);
+        System.out.println("img = " + img);
+        System.out.println("p = " + p);
+
+    }
 }
