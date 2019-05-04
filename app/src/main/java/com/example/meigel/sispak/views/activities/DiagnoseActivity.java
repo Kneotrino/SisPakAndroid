@@ -60,6 +60,8 @@ public class DiagnoseActivity extends AppCompatActivity {
     }
 
     private void setupBtn(){
+
+
         btnDiagnose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

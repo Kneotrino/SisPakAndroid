@@ -131,6 +131,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MenuActivity.this, DiagnoseActivity.class);
+                i.putExtra("admin", AdminMode);
                 startActivity(i);
             }
         });
