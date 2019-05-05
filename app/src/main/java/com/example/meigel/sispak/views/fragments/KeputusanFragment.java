@@ -11,11 +11,13 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.meigel.sispak.R;
 import com.example.meigel.sispak.helpers.SQLiteHelper;
 import com.example.meigel.sispak.models.Gejala;
 import com.example.meigel.sispak.models.Keputusan;
+import com.example.meigel.sispak.models.Penyakit;
 import com.example.meigel.sispak.views.adapters.GejalaItemAdapter;
 import com.example.meigel.sispak.views.adapters.KeputusanAdapter;
 import com.example.meigel.sispak.views.adapters.KeputusanGejalaAdapater;
@@ -50,7 +52,8 @@ public class KeputusanFragment extends Fragment {
     }
 
     private void setupList() {
-        final List<Keputusan> keputusanList = SQLiteHelper.getInstance(getActivity()).getKeputusans();
+        final List<Penyakit> keputusanList = SQLiteHelper.getInstance(getActivity()).getPenyakits();
+
         adapter = new KeputusanAdapter(keputusanList, getActivity());
         listItemKeputusan.setAdapter(adapter);
 
@@ -69,12 +72,22 @@ public class KeputusanFragment extends Fragment {
                 final AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
 
+                Keputusan byKode = SQLiteHelper.getInstance(getActivity())
+                        .getKeputusanByKode(keputusanList.get(position).getKode());
+
+//                System.out.println("byKode = " + byKode);
 
                 Button btnSimpanKeputusan = (Button) prompt.findViewById(R.id.btnSimpanKeputusan);
                 Button btnHapusKeputusan = (Button) prompt.findViewById(R.id.btnHapusKeputusan);
-                final EditText KeputusanKode = (EditText) prompt.findViewById(R.id.KeputusanKode);
+                TextView txtNamaPenyakit = (TextView) prompt.findViewById(R.id.txtNamaPenyakit);
+                final EditText KeputusanKode = (EditText) prompt.findViewById(R.id.BobotPenyakit);
+                KeputusanKode.setText(byKode.getProbalitas());
 
-                KeputusanKode.setText(keputusanList.get(position).getPenyakit());
+                txtNamaPenyakit.setText(keputusanList.get(position).getName());
+
+
+
+//                KeputusanKode.setText(keputusanList.get(position).getP());
 
 
                 ListView listGejalaKeputusan = (ListView) prompt.findViewById(R.id.listGejalaKeputusan);
@@ -96,7 +109,7 @@ public class KeputusanFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        
+
                         alertDialog.dismiss();
                     }
                 });

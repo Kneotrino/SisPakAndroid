@@ -163,6 +163,16 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        btnDataKeputusan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuActivity.this, MainDataActivity.class);
+                i.putExtra("tipe", "keputusan");
+                i.putExtra("admin", AdminMode);
+                startActivity(i);
+            }
+        });
+
         btnArtikel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

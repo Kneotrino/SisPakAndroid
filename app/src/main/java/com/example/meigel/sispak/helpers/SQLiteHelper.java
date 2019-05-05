@@ -121,7 +121,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public Penyakit getPenyakit(String code){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_PENYAKIT,
+        Cursor cursor;
+        cursor = db.query(TABLE_PENYAKIT,
                 new String[] {
                         KEY_PENYAKIT_ID,
                         KEY_KODE,
@@ -290,6 +291,34 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     public Gejala getKeputusan(int id){
         return null;
+    }
+
+    public Keputusan getKeputusanByKode(String kode){
+        SQLiteDatabase db = this.getReadableDatabase();
+//        String CREATE_KEPUTUSAN_TBL = "CREATE TABLE " + TABLE_KEPUTUSAN + "("
+//                + KEY_KEPUTUSAN_ID + " INTEGER PRIMARY KEY,"
+//                + KEY_PENYAKIT + " TEXT,"
+//                + KEY_GEJALA + " TEXT,"
+//                + KEY_PROBALITAS + " TEXT" + ")";
+
+        Cursor cursor = db.query(TABLE_KEPUTUSAN,
+                new String[] {
+                        KEY_KEPUTUSAN_ID,
+                        KEY_PENYAKIT,
+                        KEY_GEJALA,
+                        KEY_PROBALITAS,
+                        }, KEY_PENYAKIT + "=?",
+                new String[] { kode }, null, null, null, null);
+        if(cursor != null)
+            cursor.moveToFirst();
+        Keputusan keputusan= new Keputusan(
+                cursor.getInt(0),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3)
+        );
+
+        return keputusan;
     }
 
     public List<Keputusan> getKeputusans(){

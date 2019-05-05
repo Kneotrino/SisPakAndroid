@@ -20,6 +20,7 @@ import com.example.meigel.sispak.helpers.SQLiteHelper;
 import com.example.meigel.sispak.models.Gejala;
 import com.example.meigel.sispak.models.Penyakit;
 import com.example.meigel.sispak.views.fragments.GejalaFragment;
+import com.example.meigel.sispak.views.fragments.KeputusanFragment;
 import com.example.meigel.sispak.views.fragments.PenyakitFragment;
 
 import java.lang.reflect.Field;
@@ -33,6 +34,7 @@ public class MainDataActivity extends AppCompatActivity
     private static boolean AdminMode = false;
     private Button btnAddPenyakit;
     private Button btnAddGejala;
+    private Button btnAddKeputusan;
 
 
     @Override
@@ -75,6 +77,7 @@ public class MainDataActivity extends AppCompatActivity
     private void setupView() {
         btnAddPenyakit = (Button) findViewById(R.id.btnAddPenyakit);
         btnAddGejala = (Button) findViewById(R.id.btnAddGejala);
+        btnAddKeputusan = (Button) findViewById(R.id.btnAddKeputusan);
 
         final Bundle bundle = new Bundle();
         bundle.putBoolean("admin", AdminMode);
@@ -89,13 +92,16 @@ public class MainDataActivity extends AppCompatActivity
             fragmentData = new PenyakitFragment();
             fragmentData.setArguments(bundle);
             setPenyakitView();
-        }
+        } else
         if (tipe.equalsIgnoreCase("gejala")) {
             fragmentData = new GejalaFragment();
             fragmentData.setArguments(bundle);
             setGejalaView();
-//            fragmentData.getli
-
+        } else
+        if (tipe.equalsIgnoreCase("keputusan")) {
+            fragmentData = new KeputusanFragment();
+            fragmentData.setArguments(bundle);
+            setKeputusanView();
         }
 
         fm.beginTransaction()
@@ -103,7 +109,7 @@ public class MainDataActivity extends AppCompatActivity
                 .commitAllowingStateLoss();
 
         if (AdminMode) {
-            toolbar.setTitle("Daftar " + tipe + "Admin Mode");
+            toolbar.setTitle("Daftar " + tipe + " Admin Mode");
         } else {
             toolbar.setTitle("Daftar " + tipe);
         }
@@ -228,19 +234,28 @@ public class MainDataActivity extends AppCompatActivity
         });
     }
 
+    private void setKeputusanView() {
+        btnAddPenyakit.setVisibility(View.GONE);
+        btnAddKeputusan.setVisibility(View.VISIBLE);
+        btnAddGejala.setVisibility(View.GONE);
+
+    }
+
     private void setGejalaView() {
         btnAddPenyakit.setVisibility(View.GONE);
+        btnAddKeputusan.setVisibility(View.GONE);
         btnAddGejala.setVisibility(View.VISIBLE);
     }
 
     private void setPenyakitView() {
+        btnAddGejala.setVisibility(View.GONE);
+        btnAddKeputusan.setVisibility(View.GONE);
         if (AdminMode)
         {
             btnAddPenyakit.setVisibility(View.VISIBLE);
         }
         else {
             btnAddPenyakit.setVisibility(View.GONE);
-            btnAddGejala.setVisibility(View.GONE);
         }
 
     }

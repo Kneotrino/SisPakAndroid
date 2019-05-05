@@ -96,7 +96,7 @@ public class GejalaFragment extends Fragment {
                 final AlertDialog.Builder alertDialogBuilder =
                         new AlertDialog.Builder(getContext());
                 alertDialogBuilder.setTitle("Admin Mode");
-                alertDialogBuilder.setMessage("Masukan Data Gejala Baru");
+                alertDialogBuilder.setMessage("Masukkan Data Gejala");
                 alertDialogBuilder.setView(prompt);
                 final AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();

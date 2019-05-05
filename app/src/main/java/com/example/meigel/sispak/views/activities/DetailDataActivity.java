@@ -191,7 +191,7 @@ public class DetailDataActivity extends AppCompatActivity {
         if (AdminMode)
             getSupportActionBar().setTitle(penyakit.getKode() + " [Admin Mode]");
         else
-            getSupportActionBar().setTitle(penyakit.getKode());
+            getSupportActionBar().setTitle(penyakit.getName());
         txtPenanganan.setText(penyakit.getPenanganan());
         txtDesc.setText(penyakit.getDesc());
         txtDesc1.setText(penyakit.getDesc1());

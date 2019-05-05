@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSimpanKeputusan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Simpan" />
+
+        <Button
+            android:id="@+id/btnHapusKeputusan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hapus" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bobot Penyakit"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+        <TextView
+            android:id="@+id/txtNamaPenyakit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Penyakit" />
+
+        <EditText
+            android:id="@+id/BobotPenyakit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="BOBOT PENYAKIT"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listGejalaKeputusan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
