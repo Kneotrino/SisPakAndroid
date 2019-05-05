@@ -1,6 +1,8 @@
 package com.example.meigel.sispak.views.activities;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,17 +17,22 @@ import android.widget.Toast;
 
 import com.example.meigel.sispak.R;
 import com.example.meigel.sispak.helpers.SQLiteHelper;
+import com.example.meigel.sispak.models.Gejala;
 import com.example.meigel.sispak.models.Penyakit;
+import com.example.meigel.sispak.views.fragments.GejalaFragment;
 import com.example.meigel.sispak.views.fragments.PenyakitFragment;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class MainDataActivity extends AppCompatActivity {
+public class MainDataActivity extends AppCompatActivity
+        implements GejalaFragment.OnFragmentInteractionListener
+{
     private String tipe;
     private Toolbar toolbar;
     private static boolean AdminMode = false;
     private Button btnAddPenyakit;
+    private Button btnAddGejala;
 
 
     @Override
@@ -65,8 +72,9 @@ public class MainDataActivity extends AppCompatActivity {
         AdminMode   = getIntent().getBooleanExtra("admin",false);
     }
 
-    private void setupView(){
+    private void setupView() {
         btnAddPenyakit = (Button) findViewById(R.id.btnAddPenyakit);
+        btnAddGejala = (Button) findViewById(R.id.btnAddGejala);
 
         final Bundle bundle = new Bundle();
         bundle.putBoolean("admin", AdminMode);
@@ -75,21 +83,29 @@ public class MainDataActivity extends AppCompatActivity {
         final FragmentManager fm = getSupportFragmentManager();
 
         System.out.println("tipe = " + tipe);
-        PenyakitFragment penyakitFragment = new PenyakitFragment();
-        penyakitFragment.setArguments(bundle);
+
+        Fragment fragmentData = null;
+        if (tipe.equalsIgnoreCase("penyakit")) {
+            fragmentData = new PenyakitFragment();
+            fragmentData.setArguments(bundle);
+            setPenyakitView();
+        }
+        if (tipe.equalsIgnoreCase("gejala")) {
+            fragmentData = new GejalaFragment();
+            fragmentData.setArguments(bundle);
+            setGejalaView();
+//            fragmentData.getli
+
+        }
 
         fm.beginTransaction()
-                .add(R.id.content,penyakitFragment,"content_fragment")
+                .add(R.id.content, fragmentData, "content_fragment")
                 .commitAllowingStateLoss();
 
-        if (AdminMode)
-        {
-            btnAddPenyakit.setVisibility(View.VISIBLE);
-            toolbar.setTitle("Daftar Penyakit Admin Mode");
-        }
-        else {
-            btnAddPenyakit.setVisibility(View.GONE);
-            toolbar.setTitle("Daftar Penyakit");
+        if (AdminMode) {
+            toolbar.setTitle("Daftar " + tipe + "Admin Mode");
+        } else {
+            toolbar.setTitle("Daftar " + tipe);
         }
 
         btnAddPenyakit.setOnClickListener(new View.OnClickListener() {
@@ -120,23 +136,22 @@ public class MainDataActivity extends AppCompatActivity {
                 alertDialog.show();
 
 
-
                 btnSimpanPenyakit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         SQLiteHelper
-                            .getInstance(MainDataActivity.this)
-                            .addPenyakit(
-                                    new Penyakit(
+                                .getInstance(MainDataActivity.this)
+                                .addPenyakit(
+                                        new Penyakit(
                                                 PenyakitKode.getText().toString(),
                                                 PenyakitNama.getText().toString(),
                                                 PenyakitPenanganan.getText().toString(),
                                                 PenyakitKeterangan.getText().toString(),
-                                            "imgicon",
+                                                "imgicon",
                                                 PenyakitPenyebab.getText().toString(),
                                                 PenyakitPengobatan.getText().toString(),
                                                 PenyakitPencegahan.getText().toString()
-                                    ));
+                                        ));
                         Log.d("Create", "Penyakit Baru");
                         UpdateView();
                         alertDialog.dismiss();
@@ -147,7 +162,7 @@ public class MainDataActivity extends AppCompatActivity {
                         PenyakitFragment penyakitFragment = new PenyakitFragment();
                         penyakitFragment.setArguments(bundle);
                         fm.beginTransaction()
-                                .replace(R.id.content,penyakitFragment,"content_fragment")
+                                .replace(R.id.content, penyakitFragment, "content_fragment")
                                 .commitAllowingStateLoss();
                     }
                 });
@@ -160,5 +175,78 @@ public class MainDataActivity extends AppCompatActivity {
 
             }
         });
+
+        btnAddGejala.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater li = LayoutInflater.from(MainDataActivity.this);
+                View prompt = li.inflate(R.layout.form_gejala, null);
+
+                final AlertDialog.Builder alertDialogBuilder =
+                        new AlertDialog.Builder(MainDataActivity.this);
+                alertDialogBuilder.setTitle("Admin Mode");
+                alertDialogBuilder.setMessage("Masukan Data Gejala Baru");
+                alertDialogBuilder.setView(prompt);
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+                Button btnSimpanGejala = (Button) prompt.findViewById(R.id.btnSimpanGejala);
+                Button btnGejalaBatal = (Button) prompt.findViewById(R.id.btnGejalaBatal);
+
+                final EditText gejalaKode = (EditText) prompt.findViewById(R.id.gejalaKode);
+                final EditText gejalaNama = (EditText) prompt.findViewById(R.id.gejalaNama);
+
+                btnGejalaBatal.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                btnSimpanGejala.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SQLiteHelper.getInstance(MainDataActivity.this)
+                                .addGejala(new Gejala("",
+                                        gejalaKode.getText().toString(),
+                                        gejalaNama.getText().toString()));
+                        Log.d("Create", "Gejala Baru");
+                        UpdateView();
+                        alertDialog.dismiss();
+                    }
+
+                    private void UpdateView() {
+                        Fragment fragment= new GejalaFragment();
+                        fragment.setArguments(bundle);
+                        fm.beginTransaction()
+                                .replace(R.id.content, fragment, "content_fragment")
+                                .commitAllowingStateLoss();
+                    }
+                });
+
+            }
+        });
+    }
+
+    private void setGejalaView() {
+        btnAddPenyakit.setVisibility(View.GONE);
+        btnAddGejala.setVisibility(View.VISIBLE);
+    }
+
+    private void setPenyakitView() {
+        if (AdminMode)
+        {
+            btnAddPenyakit.setVisibility(View.VISIBLE);
+        }
+        else {
+            btnAddPenyakit.setVisibility(View.GONE);
+            btnAddGejala.setVisibility(View.GONE);
+        }
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

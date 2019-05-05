@@ -246,8 +246,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             do {
                 Gejala penyakit = new Gejala(
                         cursor.getInt(0),
-                        cursor.getString(1),
                         cursor.getString(3),
+                        cursor.getString(1),
                         cursor.getString(2)
                 );
                 gejalas.add(penyakit);
@@ -257,11 +257,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return gejalas;
     }
 
-    public int updateGejala(int id){
+    public int updateGejala(Gejala gejala){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, gejala.getNama());
+        values.put(KEY_KODE, gejala.getKode());
+
+        db.update(TABLE_GEJALA, values, KEY_GEJALA_ID + " = " + gejala.getId(), null);
+
         return 0;
     }
 
-    public void deleteGejala(){
+    public int deleteGejala(Gejala gejala){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return  db.delete(TABLE_GEJALA,KEY_GEJALA_ID + " = " + gejala.getId(), null);
 
     }
 

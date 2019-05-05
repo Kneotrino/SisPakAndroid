@@ -1,5 +1,7 @@
 package com.example.meigel.sispak.models;
 
+import android.util.Log;
+
 /**
  * Created by meigel on 1/16/19.
  */
@@ -53,5 +55,15 @@ public class Gejala {
 
     public void setNama(String nama) {
         this.nama = nama;
+    }
+
+    public void print()
+    {
+//        Log.d("GEJALA NAMA",getNama());
+//        Log.d("GEJALA KODE",getKode());
+        System.out.println("id = " + id);
+        System.out.println("kode = " + kode);
+
+
     }
 }

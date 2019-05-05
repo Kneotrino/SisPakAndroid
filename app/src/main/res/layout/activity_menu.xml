@@ -100,6 +100,56 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/btnDataGejala"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:background="@color/white1"
+                android:padding="@dimen/_20sdp"
+                android:src="@drawable/information" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="Data Gejala" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnDataKeputusan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:background="@color/white1"
+                android:padding="@dimen/_20sdp"
+                android:src="@drawable/information" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="Data Keputusan" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/btnArtikel"
             android:layout_width="0dp"
             android:layout_height="match_parent"

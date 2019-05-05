@@ -33,7 +33,13 @@ import java.util.ArrayList;
 import io.github.skyhacker2.sqliteonweb.SQLiteOnWeb;
 
 public class MenuActivity extends AppCompatActivity {
-    private LinearLayout btnDiagnosa, btnPenyakit, btnArtikel, btnBantuan, btnKeluar;
+    private LinearLayout btnDiagnosa;
+    private LinearLayout btnPenyakit;
+    private LinearLayout btnArtikel;
+    private LinearLayout btnBantuan;
+    private LinearLayout btnKeluar;
+    private LinearLayout btnDataGejala;
+    private LinearLayout btnDataKeputusan;
     private Toolbar toolbar;
     private Button btnBack;
 
@@ -54,6 +60,8 @@ public class MenuActivity extends AppCompatActivity {
         btnArtikel = (LinearLayout) findViewById(R.id.btnArtikel);
         btnBantuan = (LinearLayout) findViewById(R.id.btnBantuan);
         btnKeluar = (LinearLayout) findViewById(R.id.btnKeluar);
+        btnDataGejala = (LinearLayout) findViewById(R.id.btnDataGejala);
+        btnDataKeputusan = (LinearLayout) findViewById(R.id.btnDataKeputusan);
         setupToolbar();
         setupView();
         setUpDate();
@@ -145,6 +153,15 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        btnDataGejala.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuActivity.this, MainDataActivity.class);
+                i.putExtra("tipe", "gejala");
+                i.putExtra("admin", AdminMode);
+                startActivity(i);
+            }
+        });
 
         btnArtikel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,10 +196,13 @@ public class MenuActivity extends AppCompatActivity {
                             AdminMode = true;
                             alertDialog.dismiss();
                             toolbar.setTitle("SiPaBi Admin Mode");
+                            btnDataGejala.setVisibility(View.VISIBLE);
+                            btnDataKeputusan.setVisibility(View.VISIBLE);
                         }
                         else
                         {
                             Toast.makeText(MenuActivity.this,"Login Gagal", Toast.LENGTH_LONG).show();
+
                         }
 
                     }

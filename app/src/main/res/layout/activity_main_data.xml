@@ -17,6 +17,12 @@
         android:layout_height="wrap_content"
         android:text="Tambah Penyakit Baru" />
 
+    <Button
+        android:id="@+id/btnAddGejala"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tambah Gejala" />
+
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
