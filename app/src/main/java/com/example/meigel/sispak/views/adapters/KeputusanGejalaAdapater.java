@@ -10,7 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.meigel.sispak.R;
+import com.example.meigel.sispak.helpers.SQLiteHelper;
 import com.example.meigel.sispak.models.Gejala;
+import com.example.meigel.sispak.models.Keputusan;
+import com.example.meigel.sispak.models.Penyakit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,16 +76,35 @@ public class KeputusanGejalaAdapater extends BaseAdapter {
         TextView txtGejalaNama = (TextView)rootView.findViewById(R.id.txtGejalaNama);
         EditText BobotGejalaKeputusan = (EditText) rootView.findViewById(R.id.BobotGejalaKeputusan);
         txtGejalaNama.setText(gejalaList.get(position).getNama());
-        BobotGejalaKeputusan.setText("0.0");
+
+        Gejala gejala = gejalaList.get(position);
+
+        try {
+            Keputusan byKode = SQLiteHelper.getInstance(context)
+                    .getKeputusanGejalaByKode(penyakit.getKode(),gejala.getKode());
+            BobotGejalaKeputusan.setText(byKode.getProbalitas());
+
+        }
+        catch ( Exception e )
+        {
+            BobotGejalaKeputusan.setText("0.0");
+
+
+        }
+
         return rootView;
     }
 
 
-    public KeputusanGejalaAdapater(List<Gejala> gejalaList, Context context) {
+
+
+    private Penyakit penyakit;
+    private List<Gejala> gejalaList;
+    private Context context;
+
+    public KeputusanGejalaAdapater(Penyakit penyakit, List<Gejala> gejalaList, Context context) {
+        this.penyakit = penyakit;
         this.gejalaList = gejalaList;
         this.context = context;
     }
-
-    private List<Gejala> gejalaList;
-    private Context context;
 }

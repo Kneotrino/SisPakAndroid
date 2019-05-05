@@ -23,6 +23,7 @@ import com.example.meigel.sispak.views.adapters.KeputusanAdapter;
 import com.example.meigel.sispak.views.adapters.KeputusanGejalaAdapater;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -81,20 +82,18 @@ public class KeputusanFragment extends Fragment {
                 Button btnHapusKeputusan = (Button) prompt.findViewById(R.id.btnHapusKeputusan);
                 TextView txtNamaPenyakit = (TextView) prompt.findViewById(R.id.txtNamaPenyakit);
                 final EditText KeputusanKode = (EditText) prompt.findViewById(R.id.BobotPenyakit);
+
                 KeputusanKode.setText(byKode.getProbalitas());
-
                 txtNamaPenyakit.setText(keputusanList.get(position).getName());
-
-
-
-//                KeputusanKode.setText(keputusanList.get(position).getP());
-
 
                 ListView listGejalaKeputusan = (ListView) prompt.findViewById(R.id.listGejalaKeputusan);
                 List<Gejala> gejalaList = SQLiteHelper.getInstance(getActivity()).getGejalas();
 
                 KeputusanGejalaAdapater keputusanGejalaAdapater =
-                        new KeputusanGejalaAdapater(gejalaList,getContext());
+                        new KeputusanGejalaAdapater(
+                                keputusanList.get(position),
+                                gejalaList,
+                                getContext());
                 listGejalaKeputusan.setAdapter(keputusanGejalaAdapater);
 
 
@@ -108,6 +107,8 @@ public class KeputusanFragment extends Fragment {
                 btnSimpanKeputusan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        List<Keputusan> dataSimpan = new LinkedList<>();
 
 
                         alertDialog.dismiss();

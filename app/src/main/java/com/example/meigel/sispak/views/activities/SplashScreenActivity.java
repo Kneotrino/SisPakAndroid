@@ -332,7 +332,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 //        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H5","E1,E3,E6,E9,E10,E14","0.5"));
 //        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H6","E1,E2,E17,E18,E19","0.4"));
 //        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H7","E5,E13,E18","0.35"));
-//        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H8","E1,E2,E3,E5,E20","0.3"));
         SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","", "0.5"));
         SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H2","","0.6"));
         SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H3","", "0.6"));
@@ -342,14 +341,14 @@ public class SplashScreenActivity extends AppCompatActivity {
         SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H7","","0.35"));
         SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H8","","0.3"));
 
-//        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E1","0.31"));
-//        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E2","0.31"));
-//        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E3","0.31"));
-//        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E4","0.31"));
-//        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E5","0.31"));
-//        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E6","0.31"));
-//        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E7","0.31"));
-//        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E8","0.31"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E1","0.3"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E2","0.2"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E3","0.4"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E4","0.3"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E5","0.3"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E7","0.3"));
+        SQLiteHelper.getInstance(this).addKeputusan(new Keputusan("H1","E8","0.3"));
+
     }
 }
 
