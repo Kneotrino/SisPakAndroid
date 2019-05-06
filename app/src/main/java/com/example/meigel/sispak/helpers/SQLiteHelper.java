@@ -359,8 +359,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return keputusans;
     }
 
-    public int updateKeputusan(int id){
-        return 0;
+    public int updateKeputusan(Keputusan keputusan){
+        SQLiteDatabase db = this.getWritableDatabase();
+//        String CREATE_KEPUTUSAN_TBL = "CREATE TABLE " + TABLE_KEPUTUSAN + "("
+//                + KEY_KEPUTUSAN_ID + " INTEGER PRIMARY KEY,"
+//                + KEY_PENYAKIT + " TEXT,"
+//                + KEY_GEJALA + " TEXT,"
+//                + KEY_PROBALITAS + " TEXT" + ")";
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_PENYAKIT, keputusan.getPenyakit());
+        values.put(KEY_GEJALA, keputusan.getGejala());
+        values.put(KEY_PROBALITAS, keputusan.getProbalitas());
+
+        return db.update(TABLE_KEPUTUSAN, values, KEY_KEPUTUSAN_ID + " = " + keputusan.getId(), null);
+
     }
 
     public void deleteKeputusan(){

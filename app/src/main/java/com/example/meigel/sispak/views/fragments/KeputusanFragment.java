@@ -25,6 +25,7 @@ import com.example.meigel.sispak.views.adapters.KeputusanGejalaAdapater;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +61,7 @@ public class KeputusanFragment extends Fragment {
 
         listItemKeputusan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
                 LayoutInflater li = LayoutInflater.from(getContext());
                 View prompt = li.inflate(R.layout.form_keputusan, null);
@@ -73,7 +74,7 @@ public class KeputusanFragment extends Fragment {
                 final AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
 
-                Keputusan byKode = SQLiteHelper.getInstance(getActivity())
+                final Keputusan byKode = SQLiteHelper.getInstance(getActivity())
                         .getKeputusanByKode(keputusanList.get(position).getKode());
 
 //                System.out.println("byKode = " + byKode);
@@ -81,15 +82,15 @@ public class KeputusanFragment extends Fragment {
                 Button btnSimpanKeputusan = (Button) prompt.findViewById(R.id.btnSimpanKeputusan);
                 Button btnHapusKeputusan = (Button) prompt.findViewById(R.id.btnHapusKeputusan);
                 TextView txtNamaPenyakit = (TextView) prompt.findViewById(R.id.txtNamaPenyakit);
-                final EditText KeputusanKode = (EditText) prompt.findViewById(R.id.BobotPenyakit);
+                final EditText BobotPenyakit = (EditText) prompt.findViewById(R.id.BobotPenyakit);
 
-                KeputusanKode.setText(byKode.getProbalitas());
+                BobotPenyakit.setText(byKode.getProbalitas());
                 txtNamaPenyakit.setText(keputusanList.get(position).getName());
 
-                ListView listGejalaKeputusan = (ListView) prompt.findViewById(R.id.listGejalaKeputusan);
-                List<Gejala> gejalaList = SQLiteHelper.getInstance(getActivity()).getGejalas();
+                final ListView listGejalaKeputusan = (ListView) prompt.findViewById(R.id.listGejalaKeputusan);
+                final List<Gejala> gejalaList = SQLiteHelper.getInstance(getActivity()).getGejalas();
 
-                KeputusanGejalaAdapater keputusanGejalaAdapater =
+                final KeputusanGejalaAdapater keputusanGejalaAdapater =
                         new KeputusanGejalaAdapater(
                                 keputusanList.get(position),
                                 gejalaList,
@@ -109,8 +110,47 @@ public class KeputusanFragment extends Fragment {
                     public void onClick(View v) {
 
                         List<Keputusan> dataSimpan = new LinkedList<>();
+                        byKode.setProbalitas(BobotPenyakit.getText().toString());
+                        dataSimpan.add(byKode);
+
+                        HashMap<String, String> data = keputusanGejalaAdapater.getMapData();
+                        Set<String> stringSet = data.keySet();
+                        for (String key: stringSet) {
+
+                            Keputusan lama;
+                            try {
+                                lama = SQLiteHelper
+                                        .getInstance(getContext())
+                                        .getKeputusanGejalaByKode(
+                                                byKode.getPenyakit(),
+                                                key
+                                                );
+                                System.out.println("lama = " + lama);
+                                lama.setProbalitas(data.get(key));
+                                System.out.println("lama = " + lama);
+                                dataSimpan.add(lama);
+                            }
+                            catch (Exception e)
+                            {
+                                Keputusan baru = new Keputusan(
+                                        byKode.getPenyakit(),
+                                        key,
+                                        data.get(key)
+                                );
+                                System.out.println("baru = " + baru);
+                                SQLiteHelper
+                                        .getInstance(getContext())
+                                        .addKeputusan(baru);
+                            }
+                        }
 
 
+                        for (Keputusan keputusan: dataSimpan) {
+                            SQLiteHelper
+                                    .getInstance(getContext())
+                                    .updateKeputusan(keputusan);
+                        }
+                        adapter.notifyDataSetChanged();
                         alertDialog.dismiss();
                     }
                 });

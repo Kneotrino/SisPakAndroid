@@ -1,6 +1,8 @@
 package com.example.meigel.sispak.views.adapters;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,9 @@ import com.example.meigel.sispak.models.Keputusan;
 import com.example.meigel.sispak.models.Penyakit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class KeputusanGejalaAdapater extends BaseAdapter {
     /**
@@ -76,22 +80,34 @@ public class KeputusanGejalaAdapater extends BaseAdapter {
         TextView txtGejalaNama = (TextView)rootView.findViewById(R.id.txtGejalaNama);
         EditText BobotGejalaKeputusan = (EditText) rootView.findViewById(R.id.BobotGejalaKeputusan);
         txtGejalaNama.setText(gejalaList.get(position).getNama());
+        final Gejala gejala = gejalaList.get(position);
 
-        Gejala gejala = gejalaList.get(position);
+        BobotGejalaKeputusan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    mapData.put(gejala.getKode(),s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         try {
             Keputusan byKode = SQLiteHelper.getInstance(context)
                     .getKeputusanGejalaByKode(penyakit.getKode(),gejala.getKode());
             BobotGejalaKeputusan.setText(byKode.getProbalitas());
-
         }
         catch ( Exception e )
         {
             BobotGejalaKeputusan.setText("0.0");
-
-
         }
-
+        mapData.put(gejala.getKode(),BobotGejalaKeputusan.getText().toString());
         return rootView;
     }
 
@@ -101,10 +117,19 @@ public class KeputusanGejalaAdapater extends BaseAdapter {
     private Penyakit penyakit;
     private List<Gejala> gejalaList;
     private Context context;
+    HashMap<String,String> mapData = new HashMap<>();
+
+    public HashMap<String, String> getMapData() {
+        System.out.println("mapData = " + mapData);
+        return mapData;
+    }
 
     public KeputusanGejalaAdapater(Penyakit penyakit, List<Gejala> gejalaList, Context context) {
         this.penyakit = penyakit;
         this.gejalaList = gejalaList;
         this.context = context;
+        for (Gejala g: gejalaList) {
+            mapData.put(g.getKode(),"0.0");
+        }
     }
 }

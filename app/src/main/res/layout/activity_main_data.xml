@@ -23,12 +23,6 @@
         android:layout_height="wrap_content"
         android:text="Tambah Gejala" />
 
-    <Button
-        android:id="@+id/btnAddKeputusan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tambah Keputusan" />
-
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

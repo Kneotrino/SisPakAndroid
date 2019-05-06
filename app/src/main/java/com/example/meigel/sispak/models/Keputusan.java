@@ -54,4 +54,13 @@ public class Keputusan {
     public void setProbalitas(String probalitas) {
         this.probalitas = probalitas;
     }
+
+    @Override
+    public String toString() {
+        return "Keputusan{" +
+                "penyakit='" + penyakit + '\'' +
+                ", gejala='" + gejala + '\'' +
+                ", probalitas='" + probalitas + '\'' +
+                '}';
+    }
 }
