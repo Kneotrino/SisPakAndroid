@@ -20,6 +20,7 @@ import com.example.meigel.sispak.models.Gejala;
 import com.example.meigel.sispak.views.adapters.GejalaItemAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DiagnoseActivity extends AppCompatActivity {
@@ -69,21 +70,20 @@ public class DiagnoseActivity extends AppCompatActivity {
                 Log.d("MainApp","Checked size : " + checked);
                 Log.d("MainApp","List Gejala size : " + listGejalas.size());
                 if(checked.size() < listGejalas.size()) {
+                    ArrayList<String> data = new ArrayList<>();
                     ArrayList<Gejala> selectedItems = new ArrayList<Gejala>();
                     for (int i = 0; i < checked.size(); i++) {
                         int pos = checked.keyAt(i);
                         if (checked.valueAt(i))
-                            selectedItems.add((Gejala) gia.getItem(pos));
-                    }
-
-                    String[] outArr = new String[selectedItems.size()];
-                    for (int j = 0; j < selectedItems.size(); j++) {
-                        outArr[j] = selectedItems.get(j).getParameter();
+                            {
+                                Gejala item = (Gejala) gia.getItem(pos);
+                                data.add(item.getKode());
+                            }
                     }
 
                     Intent i = new Intent(DiagnoseActivity.this, ResultDiagnoseActivity.class);
                     Bundle b = new Bundle();
-                    b.putStringArray("selectedItems", outArr);
+                    b.putStringArrayList("selectedItems", data);
                     i.putExtras(b);
                     startActivity(i);
                 } else {

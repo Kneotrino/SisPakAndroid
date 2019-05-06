@@ -18,7 +18,9 @@ import com.example.meigel.sispak.helpers.SQLiteHelper;
 import com.example.meigel.sispak.models.Keputusan;
 import com.example.meigel.sispak.models.Penyakit;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -67,7 +69,7 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
 
     private void getBundle(){
         Bundle b = getIntent().getExtras();
-        results = b.getStringArray("selectedItems");
+        results = b.getStringArrayList("selectedItems").toArray(new String[0]);
     }
 
     private void chainProcess(){
@@ -152,7 +154,12 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
 
         List<String> test = new LinkedList<>();
         for (String s : results)
+        {
             test.add(s);
+        }
+
+        System.out.println("results = " + Arrays.toString(results) );
+//        System.out.println("test = " + test);
 
         List<Keputusan> keputusanList = SQLiteHelper.getInstance(ResultDiagnoseActivity.this).getKeputusans();
 
@@ -161,22 +168,22 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
                     keputusan.getPenyakit()+"-"+keputusan.getGejala(),
                     Double.parseDouble(keputusan.getProbalitas()));
         }
+//        System.out.println("mapProbability = " + mapProbability);
+
         double TotalProbabilitas = 0d;
         final List<Penyakit> penyakits = SQLiteHelper.getInstance(this).getPenyakits();
 
         for (Penyakit penyakit : penyakits) {
-//            mapProbability.
+            double probababilitasExH = 1d;
+            String keyH = penyakit.getKode();
             final Keputusan byKode = SQLiteHelper.getInstance(ResultDiagnoseActivity.this)
                     .getKeputusanByKode(penyakit.getKode());
             mapProbability.put(byKode.getPenyakit(),Double.parseDouble(byKode.getProbalitas()));
-
-            double probababilitasExH = 1d;
-            String keyH = penyakit.getKode();
             for (String s : test) {
                 String key = keyH+"-"+s;
                 Double vE = 0d;
                 if  ( mapProbability.get(key) == null)
-                    vE = .25d;
+                    vE = 0d;
                 else
                     vE = mapProbability.get(key);
                 probababilitasExH = probababilitasExH * vE;
@@ -201,19 +208,19 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
                 String key = keyH+"-"+s;
                 Double vE = 0d;
                 if  ( mapProbability.get(key) == null)
-                    vE = .25d;
+                    vE = 0d;
                 else
                     vE = mapProbability.get(key);
                 probababilitasExH = probababilitasExH * vE;
             }
             Double vH = 0d;
             if  ( mapProbability.get(penyakit.getKode()) == null)
-                vH = .25d;
+                vH = 0d;
             else
                 vH = mapProbability.get(penyakit.getKode());
             probababilitasExH = probababilitasExH * vH;
             double value = probababilitasExH / TotalProbabilitas;
-            Log.d("P(" +keyH +"|"+ test.toString()+") ", "= "+value );
+//            Log.d("P(" +keyH +"|"+ test.toString()+") ", "= "+value );
             double p = probababilitasExH/TotalProbabilitas;
 //            resultnya.add(toPercentage(p,2)+ " % " + penyakit.getName());
             penyakit.setP(p);
@@ -262,7 +269,6 @@ public class ResultDiagnoseActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(ResultDiagnoseActivity.this, DetailDataActivity.class);
                 i.putExtra("id", penyakits.get(position).getKode());
-//                i.putExtra("id",(String)keySet.toArray()[position]);
                 startActivity(i);
             }
         });
