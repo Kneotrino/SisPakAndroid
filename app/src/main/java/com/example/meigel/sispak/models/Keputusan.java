@@ -21,6 +21,7 @@ public class Keputusan {
         this.penyakit = penyakit;
         this.gejala = gejala;
         this.probalitas = probalitas;
+        System.out.println("this = " + this);
     }
 
     public int getId() {

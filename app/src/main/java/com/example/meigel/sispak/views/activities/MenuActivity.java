@@ -176,6 +176,8 @@ public class MenuActivity extends AppCompatActivity {
         btnArtikel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 LayoutInflater li = LayoutInflater.from(MenuActivity.this);
                 View prompt = li.inflate(R.layout.frament_login, null);
 
@@ -191,7 +193,40 @@ public class MenuActivity extends AppCompatActivity {
                 final EditText txtUsername = (EditText) prompt.findViewById(R.id.txtUsername);
 
                 final AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+//                alertDialog.show();
+
+                if (AdminMode)  {
+                    final AlertDialog.Builder logoutBuilder = new AlertDialog.Builder(MenuActivity.this);
+                    logoutBuilder.setTitle("Admin Mode");
+                    logoutBuilder.setMessage("Apakah anda ingin logout?");
+                    logoutBuilder.setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Do nothing but close the dialog
+                            AdminMode = false;
+                            btnDataGejala.setVisibility(View.GONE);
+                            btnDataKeputusan.setVisibility(View.GONE);
+
+                            dialog.dismiss();
+                        }
+                    });
+
+                    logoutBuilder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            // Do nothing
+                            dialog.dismiss();
+                        }
+                    });
+
+                    logoutBuilder.create().show();
+                }
+                else {
+                    alertDialog.show();
+                }
+
 
                 btnLogin.setOnClickListener(new View.OnClickListener() {
                     @Override
