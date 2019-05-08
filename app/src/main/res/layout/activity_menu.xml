@@ -82,7 +82,7 @@
                 android:layout_weight="10"
                 android:background="@color/white1"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/user" />
+                android:src="@drawable/information" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -163,9 +163,10 @@
                 android:layout_weight="10"
                 android:background="@color/white1"
                 android:padding="@dimen/_20sdp"
-                android:src="@drawable/information" />
+                android:src="@drawable/user" />
 
             <TextView
+                android:id="@+id/txtAdminMode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

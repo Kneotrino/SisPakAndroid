@@ -158,6 +158,7 @@ public class DetailDataActivity extends AppCompatActivity {
                                         .getInstance(DetailDataActivity.this)
                                         .deletePenyakit(penyakit);
                                 dialog.cancel();
+                                finish(); //Tambah Ini
                                 Intent i = new Intent(DetailDataActivity.this, MainDataActivity.class);
                                 i.putExtra("tipe", "penyakit");
                                 i.putExtra("admin", AdminMode);
@@ -201,4 +202,13 @@ public class DetailDataActivity extends AppCompatActivity {
         imgPenyakit.setImageResource(getResources().getIdentifier(penyakit.getImg(),"drawable",getPackageName()));
     }
 
+    //Tambah Ini Semua
+    @Override
+    public void onBackPressed() {        // to prevent irritating accidental logouts
+        Intent i = new Intent(DetailDataActivity.this, MainDataActivity.class);
+        i.putExtra("tipe", "penyakit");
+        i.putExtra("admin", AdminMode);
+        finish();
+        startActivity(i);
+    }
 }

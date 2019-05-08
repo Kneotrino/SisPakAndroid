@@ -7,6 +7,7 @@ package com.example.meigel.sispak.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.Build;
 
 
 public class SessionHelper {
@@ -21,6 +22,7 @@ public class SessionHelper {
     private static final String IS_LOGIN = "IsLoggedIn";
     private static final String KEY_APP = "app";
     private static final String KEY_FIRST = "first";
+    private static final String KEY_VERSION = "VERSION";
 
     public static SessionHelper getInstance(Context context){
         if(sh == null){
@@ -36,13 +38,25 @@ public class SessionHelper {
         editor = pref.edit();
     }
 
+
     public void setAppFirstTime(boolean status){
         editor.putBoolean(KEY_FIRST, status);
-
         editor.commit();
     }
 
+    public void setVersion(int version){
+        editor.putInt(KEY_VERSION, version);
+        editor.commit();
+    }
+
+    public int getVersion(int version){
+        return pref.getInt(KEY_VERSION, 0);
+
+    }
+
+
     public boolean getAppFirstTime(){
+
         return pref.getBoolean(KEY_FIRST, true);
     }
 }

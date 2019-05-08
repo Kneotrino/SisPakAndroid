@@ -46,6 +46,7 @@ public class PenyakitFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getActivity(), DetailDataActivity.class);
+                getActivity().finish();
                 i.putExtra("id",penyakits.get(position).getKode());
                 i.putExtra("admin",AdminMode);
                 startActivity(i);

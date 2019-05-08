@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meigel.sispak.R;
@@ -206,6 +207,8 @@ public class MenuActivity extends AppCompatActivity {
                             AdminMode = false;
                             btnDataGejala.setVisibility(View.GONE);
                             btnDataKeputusan.setVisibility(View.GONE);
+                            TextView textView = findViewById(R.id.txtAdminMode);
+                            textView.setText("Admin Mode");
 
                             dialog.dismiss();
                         }
@@ -234,6 +237,7 @@ public class MenuActivity extends AppCompatActivity {
                         String pass = txtPassword.getText().toString();
                         String user = txtUsername.getText().toString();
                         boolean login = Login(user, pass);
+                        System.out.println("login = " + login);
 
                         if (login)
                         {
@@ -243,6 +247,10 @@ public class MenuActivity extends AppCompatActivity {
                             toolbar.setTitle("SiPaBi Admin Mode");
                             btnDataGejala.setVisibility(View.VISIBLE);
                             btnDataKeputusan.setVisibility(View.VISIBLE);
+
+                            TextView textView = findViewById(R.id.txtAdminMode);
+                            textView.setText("User Mode");
+//                            AdminMode
                         }
                         else
                         {
@@ -283,6 +291,7 @@ public class MenuActivity extends AppCompatActivity {
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 finish();
+                                System.exit(0); //Tambah Ini
                             }
                         })
                         .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
@@ -300,8 +309,10 @@ public class MenuActivity extends AppCompatActivity {
         ArrayList<String> dataUser = new ArrayList<String>();
         dataUser.add("admin:admin");
         String key = user + ":" + pass;
+        System.out.println("key = " + key);
         for(String s : dataUser)
-            if(s.trim().contains(key)) return true;
+            if(s.equals(key))
+                return true;
         return false;
     }
 

@@ -39,8 +39,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
         else {
             Log.d("MainApp","Not First session");
-//            SQLiteHelper.getInstance(this).onUpdate();
-//            queryPenyakit();
         }
         CheckUpdate();
     }
