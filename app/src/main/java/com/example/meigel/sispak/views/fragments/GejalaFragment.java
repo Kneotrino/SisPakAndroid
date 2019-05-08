@@ -109,7 +109,6 @@ public class GejalaFragment extends Fragment {
                 final EditText gejalaKode = (EditText) prompt.findViewById(R.id.gejalaKode);
                 final EditText gejalaNama = (EditText) prompt.findViewById(R.id.gejalaNama);
 
-                btnSimpanGejala.setText("EDIT");
                 btnGejalaBatal.setText("HAPUS");
                 gejalaKode.setText(gejala.getKode());
                 gejalaNama.setText(gejala.getNama());
