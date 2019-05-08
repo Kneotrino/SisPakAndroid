@@ -36,6 +36,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             queryKeputusan();
             queryPenyakit();
             SessionHelper.getInstance(this).setAppFirstTime(false);
+            SessionHelper.getInstance(this).setVersion(4);
         }
         else {
             Log.d("MainApp","Not First session");
@@ -48,7 +49,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     }
 
-    private static String url = "https://kliniksip.firebaseio.com/Version/Lastest/apkInfo.json";
+    private static String url = "https://kliniksip.firebaseio.com/Version.json";
 
     private void CheckUpdate() {
         new Handler().postDelayed(new Runnable() {

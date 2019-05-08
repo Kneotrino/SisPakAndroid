@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meigel.sispak.R;
+import com.example.meigel.sispak.helpers.SessionHelper;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -75,9 +76,11 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
+//    private static String url = "https://kliniksip.firebaseio.com/Version/Lastest/apkInfo.json";
+
 
     public void cekUpdate(String json) {
-        versionCode = 4;
+        versionCode = SessionHelper.getInstance(this).getVersion(4);
         System.out.println("versionCode = " + versionCode);
 
         SQLiteOnWeb.init(this).start();
@@ -89,7 +92,6 @@ public class MenuActivity extends AppCompatActivity {
             int newVersionCode = Integer.parseInt(versionCodeString);
             System.out.println("newVersionCode = " + newVersionCode);
             pathDownload = reader.getString("path");
-
             if (newVersionCode > versionCode)
             {
                 Log.d("Update","Perlu update");
@@ -99,6 +101,8 @@ public class MenuActivity extends AppCompatActivity {
                 builder.setMessage("Apakah anda ingin memperbarui aplikasi?");
                 builder.setPositiveButton("Iya", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+
+
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pathDownload));
                         startActivity(browserIntent);
                         dialog.dismiss();
@@ -112,6 +116,7 @@ public class MenuActivity extends AppCompatActivity {
                 });
                 android.app.AlertDialog alert = builder.create();
                 alert.show();
+                SessionHelper.getInstance(this).setVersion(newVersionCode);
             }
         } catch (JSONException e) {
             e.printStackTrace();

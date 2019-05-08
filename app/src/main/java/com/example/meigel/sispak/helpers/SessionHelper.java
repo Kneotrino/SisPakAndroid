@@ -49,9 +49,8 @@ public class SessionHelper {
         editor.commit();
     }
 
-    public int getVersion(int version){
-        return pref.getInt(KEY_VERSION, 0);
-
+    public int getVersion(int def){
+        return pref.getInt(KEY_VERSION, def);
     }
 
 
